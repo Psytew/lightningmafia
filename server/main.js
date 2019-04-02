@@ -10,4 +10,13 @@ Meteor.startup(() => {
 
   console.log(Users.find().fetch());
   console.log("Hi!")
+
+  Meteor.methods({
+      StartButtonFunction(userInfo){
+			room = Users.find({_id:userInfo}).fetch()[0].room
+			console.log(room)
+			console.log(Users.find({room:room}).fetch())
+			Users.update({room:room},{$set: {gameStatus:"night"}},{multi:true})
+		}
+    });
 });

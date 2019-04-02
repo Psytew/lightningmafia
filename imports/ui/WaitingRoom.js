@@ -10,15 +10,32 @@ function displayUsers(userInfo){
 	console.log(Users.find({room:thisUser.room}).fetch())
 	return users.map((user) => {
 		if (user.name != null){
-			return <p key={user._id}>{user.name} has user ID: {user._id} and room code: {user.room}</p>
+			return <p key={user._id}>{user.name} with user ID: {user._id}</p>
 		}
 	}
 )}
 
+function displayRoomCode(userInfo){
+	room = Users.find({_id:userInfo}).fetch()[0].room
+	return <h2>The room code is {room}</h2>
+}
+
+function displayStartButton(userInfo){
+	return <form onSubmit={function(event){
+		event.preventDefault()
+		Meteor.call('StartButtonFunction',userInfo)
+	}
+	}><button>Start Game</button></form>
+}
+
 export default class WaitingRoom extends React.Component {
 	render(){
 		return (
-			displayUsers(this.props.userID)
+			[
+				displayRoomCode(this.props.userID),
+				displayUsers(this.props.userID),
+				displayStartButton(this.props.userID)
+			]
 		)
 	}
 }
