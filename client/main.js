@@ -11,8 +11,6 @@ import {Users} from '../imports/users.js'
 Meteor.startup( () => {
 	let newID = Math.random().toString(36).replace(/[^a-z]+/g, '').substr(2, 10);
 	newUser = Users.insert({id:newID})
-	console.log(newUser)
-	console.log(Users.find({_id:newUser}).fetch())
 
 	Tracker.autorun(function(){
 		ReactDOM.render(<App userID={newUser} />, document.getElementById("app"));

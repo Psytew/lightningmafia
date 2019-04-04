@@ -27,7 +27,6 @@ export default class RoomFind extends React.Component {
 		e.preventDefault();
 		let newID = Math.random().toString(36).replace(/[^a-z]+/g, '').substr(2, 10);
 		let room = Rooms.insert({id:newID,players:[this.props.userID]})
-		console.log(room)
 		Users.update({
 				_id:this.props.userID,
 			},{
@@ -37,9 +36,7 @@ export default class RoomFind extends React.Component {
 	handleSubmitJoin(e){
 		e.preventDefault();
 		let roomcode = e.target.roomcode.value;
-		console.log(Rooms.find(roomcode).fetch())
-		if (Rooms.find(roomcode).fetch().length > 0){
-			console.log(Rooms.find(roomcode).fetch()[0]._id)
+		if (Rooms.find(roomcode).fetch().length > 0 && Rooms.find(roomcode).fetch()[0].gameStatus == null){
 			Rooms.update({
 				_id:roomcode
 			},{

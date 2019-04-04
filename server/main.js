@@ -8,8 +8,6 @@ Meteor.startup(() => {
 //  Users.insert({id:"This is the first ID!"})
 //  Rooms.insert({id:"This is a room I guess!"})
 
-  console.log(Users.find().fetch());
-  console.log("Hi!")
 
   	Meteor.methods({
       	StartButtonFunction(userInfo){
@@ -34,6 +32,25 @@ Meteor.startup(() => {
 		  	}
 		  	//Updates each player to go the night phase
 			Users.update({room:room},{$set: {gameStatus:"night"}},{multi:true})
+			Rooms.update({_id:room},{$set: {gameStatus:"night",timer:60}})
+			Meteor.call('CountDownNight',room)
+		},
+
+		CountDownNight(room){
+			timer = 60;
+			for (let i = timer; i > 0; i--){
+				Meteor.call('SetDelay',i,room)
+			}
+		},
+
+		SetDelay(i,room) {
+			Meteor.setTimeout(function(){
+				console.log(i);
+				Rooms.update({_id:room},{$set:{timer:i}})
+			},1000 + (1000 * (60 - i)))
+			Meteor.setTimeout(function(){
+				Users.update({room:room},{$set: {gameStatus:"day"}},{multi:true})
+			},1000 + (60050))
 		}
     });
 });

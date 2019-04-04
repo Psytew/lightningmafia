@@ -2,6 +2,8 @@ import React from 'react'
 
 import {Users} from '../users.js'
 
+import {Rooms} from '../rooms.js'
+
 function mapUsers(userInfo){
 	thisUser = Users.find({_id:userInfo}).fetch()[0]
 	users = Users.find({room:thisUser.room}).fetch()
@@ -11,6 +13,13 @@ function mapUsers(userInfo){
 		}
 	}
 )}
+
+function getRemainingTime(userInfo){
+	thisUser = Users.find({_id:userInfo}).fetch()[0]
+	console.log(thisUser)
+	console.log(Rooms.find({room:thisUser.room}).fetch())
+	return Rooms.find({_id:thisUser.room}).fetch()[0].timer
+}
 
 export default class WaitingRoom extends React.Component {
 	render(){
@@ -35,22 +44,27 @@ export default class WaitingRoom extends React.Component {
 		var masonMessage = ""
 		if (masons.length == 1){
 			masonMessage = "You are the only mason! How sad."
-		} else {
+		} else if (masons.length > 1) {
 			masonMessage += "The masons are: "
 			for (let i = 0; i < masons.length - 1; i++){
 				masonMessage += masons[i].name + ", "
 			}
 			masonMessage += "and " + masons[masons.length-1].name + "!"
 		}
+		var roomTime = Rooms.find({_id:room}).fetch()[0].timer
+		console.log(Rooms.find({_id:room}).fetch())
+		console.log(roomTime)
 		if (thisUser.role == "Seer"){
 			return (
 				<div>
 					<h2>Night Phase</h2>
+					<p>Time remaining: {getRemainingTime(this.props.userID)} seconds.</p>
 					<p>Your role is the {thisUser.role}</p>
 					<p>Who do you want to investigate?</p>
 					<form>
 						<select name="seer">
 						  {mapUsers(this.props.userID)}
+						  <option value="middle" key="middle">Check the Middle</option>
 						</select>
 						<button>Submit</button>
 					</form>
@@ -60,6 +74,7 @@ export default class WaitingRoom extends React.Component {
 			return (
 				<div>
 					<h2>Night Phase</h2>
+					<p>Time remaining: {getRemainingTime(this.props.userID)} seconds.</p>
 					<p>Your role is the {thisUser.role}</p>
 					<p>{werewolfMessage}</p>
 				</div>
@@ -68,6 +83,7 @@ export default class WaitingRoom extends React.Component {
 			return (
 				<div>
 					<h2>Night Phase</h2>
+					<p>Time remaining: {getRemainingTime(this.props.userID)} seconds.</p> 
 					<p>Your role is the {thisUser.role}</p>
 					<p>You just get to chill out!</p>
 				</div>
@@ -76,6 +92,7 @@ export default class WaitingRoom extends React.Component {
 			return (
 				<div>
 					<h2>Night Phase</h2>
+					<p>Time remaining: {getRemainingTime(this.props.userID)} seconds.</p> 
 					<p>Your role is the {thisUser.role}</p>
 					<p>Who do you want to rob?</p>
 					<form>
@@ -90,6 +107,7 @@ export default class WaitingRoom extends React.Component {
 			return (
 				<div>
 					<h2>Night Phase</h2>
+					<p>Time remaining: {getRemainingTime(this.props.userID)} seconds.</p> 
 					<p>Your role is the {thisUser.role}</p>
 					<p>Who do you want to switch?</p>
 					<form>
@@ -107,6 +125,7 @@ export default class WaitingRoom extends React.Component {
 			return (
 				<div>
 					<h2>Night Phase</h2>
+					<p>Time remaining: {getRemainingTime(this.props.userID)} seconds.</p> 
 					<p>Your role is the {thisUser.role}</p>
 					<p>{masonMessage}</p>
 				</div>
@@ -115,6 +134,7 @@ export default class WaitingRoom extends React.Component {
 			return (
 				<div>
 					<h2>Night Phase</h2>
+					<p>Time remaining: {getRemainingTime(this.props.userID)} seconds.</p> 
 					<p>Your role is the {thisUser.role}</p>
 					<p>Who do you want to protect?</p>
 					<form>
@@ -129,6 +149,7 @@ export default class WaitingRoom extends React.Component {
 			return (
 				<div>
 					<h2>Night Phase</h2>
+					<p>Time remaining: {getRemainingTime(this.props.userID)} seconds.</p>
 					<p>Your role is the {thisUser.role}</p>
 					<p>{minionMessage}</p>
 				</div>

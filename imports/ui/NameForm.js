@@ -15,8 +15,6 @@ export default class NameForm extends React.Component {
 		let playerName = e.target.playerName.value;
 		e.preventDefault();
 		if (playerName) {
-			console.log(this.props.userID)
-			console.log(playerName)
 			e.target.playerName.value = ''
 			Users.update({
 				_id:this.props.userID,
