@@ -5,6 +5,8 @@ import RoomFind from '../ui/RoomFind.js'
 import WaitingRoom from '../ui/WaitingRoom.js'
 import NightPhase from '../ui/NightPhase.js'
 import DayPhase from "../ui/DayPhase.js"
+import Point from "../ui/Point.js"
+import Results from "../ui/Results.js"
 
 import {Users} from '../users.js'
 
@@ -29,6 +31,14 @@ export default class App extends React.Component {
 		} else if (Users.find({_id:newUser}).fetch()[0].gameStatus == "day"){
 			return (
 				<DayPhase userID={this.props.userID} />
+			)
+		} else if (Users.find({_id:newUser}).fetch()[0].gameStatus == "point"){
+			return (
+				<Point userID={this.props.userID} />
+			)
+		} else if (Users.find({_id:newUser}).fetch()[0].gameStatus == "results"){
+			return (
+				<Results userID={this.props.userID} />
 			)
 		}
 	}

@@ -51,6 +51,19 @@ Meteor.startup(() => {
 			Meteor.setTimeout(function(){
 				Users.update({room:room},{$set: {gameStatus:"day"}},{multi:true})
 			},1000 + (60050))
+		},
+
+		SetRoomValues(room, status){
+			Users.update({room:room},{$set: {gameStatus:status}},{multi:true})
+			Rooms.update({_id:room},{$set: {gameStatus:status}})
+		},
+
+		SetIndividualValue(room, status){
+			Users.update({room:room},{$set: {gameStatus:status}})
+		},
+
+		SetRoomValue(room,status){
+			Rooms.update({_id:room},{$set: {gameStatus:status}})
 		}
     });
 });
