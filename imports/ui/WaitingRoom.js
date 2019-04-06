@@ -20,7 +20,12 @@ function displayRoomCode(userInfo){
 function displayStartButton(userInfo){
 	return <form onSubmit={function(event){
 		event.preventDefault()
-		Meteor.call('StartButtonFunction',userInfo)
+		users = Users.find({room:thisUser.room}).fetch()
+		if (users.length >= 3){
+			Meteor.call('StartButtonFunction',userInfo)
+		} else {
+			alert("You need at least three people to play!")
+		}
 	}
 	}><button>Start Game</button></form>
 }

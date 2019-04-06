@@ -22,5 +22,5 @@ Meteor.startup( () => {
 });
 
 closingWindow = function(newUser){
-	Users.remove({_id:newUser})
+	Meteor.call('LogoutUser',newUser)
 }

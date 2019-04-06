@@ -8,7 +8,7 @@ function mapUsers(userInfo){
 	thisUser = Users.find({_id:userInfo}).fetch()[0]
 	users = Users.find({room:thisUser.room}).fetch()
 	return users.map((user) => {
-		if (user.name != null){
+		if (user.name != null && user.name != thisUser.name){
 			return <option value={user.name} key={user._id}>{user.name}</option>
 		}
 	}
@@ -16,8 +16,6 @@ function mapUsers(userInfo){
 
 function getRemainingTime(userInfo){
 	thisUser = Users.find({_id:userInfo}).fetch()[0]
-	console.log(thisUser)
-	console.log(Rooms.find({room:thisUser.room}).fetch())
 	return Rooms.find({_id:thisUser.room}).fetch()[0].timer
 }
 
@@ -28,54 +26,56 @@ export default class WaitingRoom extends React.Component {
 		var werewolfMessage = ""
 		var minionMessage = ""
 		if (werewolves.length == 0){
-			minionMessage = "There is no werewolf! Try to survive!"
+			minionMessage = "No werewolf plagues the village tonight! You must be the menace!"
 		} else if (werewolves.length == 1){
-			werewolfMessage = "You are the only werewolf!"
-			minionMessage = werewolves[0].name + " is the only werewolf!"
+			werewolfMessage = "The meeting is scarce tonight. You are the lone werewolf."
+			minionMessage = werewolves[0].name + " is the sole werewolf; guard them with your life!"
 		} else {
-			werewolfMessage = "The werewolves are: "
+			werewolfMessage = "The werewolves met and learned one another's names: "
 			for (let i = 0; i < werewolves.length - 1; i++){
 				werewolfMessage += werewolves[i].name + ", "
 			}
 			werewolfMessage += "and " + werewolves[werewolves.length-1].name + "!"
-			minionMessage = werewolfMessage
-		}
-		var masons = Users.find({room:room,role:"Mason"}).fetch()
-		var masonMessage = ""
-		if (masons.length == 1){
-			masonMessage = "You are the only mason! How sad."
-		} else if (masons.length > 1) {
-			masonMessage += "The masons are: "
-			for (let i = 0; i < masons.length - 1; i++){
-				masonMessage += masons[i].name + ", "
-			}
-			masonMessage += "and " + masons[masons.length-1].name + "!"
+			minionMessage = werewolfMessage + " Protect them!"
 		}
 		var roomTime = Rooms.find({_id:room}).fetch()[0].timer
-		console.log(Rooms.find({_id:room}).fetch())
-		console.log(roomTime)
 		if (thisUser.role == "Seer"){
-			return (
-				<div>
-					<h2>Night Phase</h2>
-					<p>Time remaining: {getRemainingTime(this.props.userID)} seconds.</p>
-					<p>Your role is the {thisUser.role}</p>
-					<p>Who do you want to investigate?</p>
-					<form>
-						<select name="seer">
-						  {mapUsers(this.props.userID)}
-						  <option value="middle" key="middle">Check the Middle</option>
-						</select>
-						<button>Submit</button>
-					</form>
-				</div>
-			)
+			let seerActionDone = Rooms.find({_id:room}).fetch()[0].Seer
+			if (seerActionDone == null){
+				return (
+					<div>
+						<h2>Night Phase</h2>
+						<p>Time remaining: {getRemainingTime(this.props.userID)} seconds.</p>
+						<p>{thisUser.name}: You are the {thisUser.role}, and it is your solemn duty to use your skills to learn the truth!</p>
+						<p>Who do you want to investigate?</p>
+						<form onSubmit={function(event){
+							event.preventDefault()
+							let victim = event.target.seer.value
+							Meteor.call('SeerInformation',room,victim)
+						}}>
+							<select name="seer">
+							  {mapUsers(this.props.userID)}
+							  <option value="middle" key="Check the Middle">Check the missing roles.</option>
+							</select>
+							<button>Submit</button>
+						</form>
+					</div>
+				)
+			} else {
+				return (
+					<div>
+						<h2>Night Phase</h2>
+						<p>Time remaining: {getRemainingTime(this.props.userID)} seconds.</p>
+						<p>Your role is the {thisUser.role}, and it is your solemn duty to use your skills to learn the truth!</p>
+					</div>
+				)
+			}
 		} else if (thisUser.role == "Werewolf"){
 			return (
 				<div>
 					<h2>Night Phase</h2>
 					<p>Time remaining: {getRemainingTime(this.props.userID)} seconds.</p>
-					<p>Your role is the {thisUser.role}</p>
+					<p>{thisUser.name}: Your role is the {thisUser.role}</p>
 					<p>{werewolfMessage}</p>
 				</div>
 			)
@@ -84,65 +84,105 @@ export default class WaitingRoom extends React.Component {
 				<div>
 					<h2>Night Phase</h2>
 					<p>Time remaining: {getRemainingTime(this.props.userID)} seconds.</p> 
-					<p>Your role is the {thisUser.role}</p>
-					<p>You just get to chill out!</p>
+					<p>{thisUser.name}: Your role is the {thisUser.role}</p>
+					<p>A were wolf has infiltrated your quaint village! Find this villain and slay them!</p>
 				</div>
 			)
 		} else if (thisUser.role == "Robber"){
-			return (
-				<div>
-					<h2>Night Phase</h2>
-					<p>Time remaining: {getRemainingTime(this.props.userID)} seconds.</p> 
-					<p>Your role is the {thisUser.role}</p>
-					<p>Who do you want to rob?</p>
-					<form>
-						<select name="robber">
-						  {mapUsers(this.props.userID)}
-						</select>
-						<button>Submit</button>
-					</form>
-				</div>
-			)
+			let robberActionDone = Rooms.find({_id:room}).fetch()[0].Rob
+			if (robberActionDone == null){
+				return (
+					<div>
+						<h2>Night Phase</h2>
+						<p>Time remaining: {getRemainingTime(this.props.userID)} seconds.</p> 
+						<p>{thisUser.name}: Your role is the {thisUser.role}. With your special skillset, though, perhaps not for long.</p>
+						<p>Who do you want to rob?</p>
+						<form onSubmit={function(event){
+							event.preventDefault()
+							let victim = event.target.robber.value
+							let stolenRole = Users.find({room:room,name:victim}).fetch()[0].role
+							let robber = thisUser.name
+							Meteor.call('RobInformation',room,robber,victim,stolenRole)
+						}}>
+							<select name="robber">
+							  {mapUsers(this.props.userID)}
+							</select>
+							<button>Submit</button>
+						</form>
+					</div>
+				)
+			} else {
+				return (
+					<div>
+						<h2>Night Phase</h2>
+						<p>Time remaining: {getRemainingTime(this.props.userID)} seconds.</p> 
+						<p>{thisUser.name}: Your role is the {thisUser.role}. With your special skillset, though, perhaps not for long.</p>
+					</div>
+				)
+			}
 		} else if (thisUser.role == "Troublemaker"){
-			return (
-				<div>
-					<h2>Night Phase</h2>
-					<p>Time remaining: {getRemainingTime(this.props.userID)} seconds.</p> 
-					<p>Your role is the {thisUser.role}</p>
-					<p>Who do you want to switch?</p>
-					<form>
-						<select name="troublemaker1">
-						  {mapUsers(this.props.userID)}
-						</select>
-						<select name="troublemaker2">
-						  {mapUsers(this.props.userID)}
-						</select>
-						<button>Submit</button>
-					</form>
-				</div>
-			)
+			let troubleActionDone = Rooms.find({_id:room}).fetch()[0].Switch
+			if (troubleActionDone == null){
+				return (
+					<div>
+						<h2>Night Phase</h2>
+						<p>Time remaining: {getRemainingTime(this.props.userID)} seconds.</p> 
+						<p>{thisUser.name}: Your role is the {thisUser.role}. Sew your mischief for the good of the village!</p>
+						<p>Who do you want to switch?</p>
+						<form onSubmit={function(event){
+							event.preventDefault()
+							let victim1 = event.target.troublemaker1.value
+							let victim2 = event.target.troublemaker2.value
+							let player1role = Users.find({room:room,name:victim1}).fetch()[0].newRole
+							let player2role = Users.find({room:room,name:victim2}).fetch()[0].newRole
+							Meteor.call('TroublemakeRoom',room,victim1,victim2,player1role,player2role)
+						}}>
+							<select name="troublemaker1">
+							  {mapUsers(this.props.userID)}
+							</select>
+							<select name="troublemaker2">
+							  {mapUsers(this.props.userID)}
+							</select>
+							<button>Submit</button>
+						</form>
+					</div>
+				)
+			} else {
+				return (
+					<div>
+						<h2>Night Phase</h2>
+						<p>Time remaining: {getRemainingTime(this.props.userID)} seconds.</p> 
+						<p>{thisUser.name}: Your role is the {thisUser.role}. Sew your mischief for the good of the village!</p>
+					</div>
+				)
+			}
 		} else if (thisUser.role == "Mason"){
+				var masons = Users.find({room:room,role:"Mason"}).fetch()
+			var masonMessage = ""
+			if (masons.length == 1){
+				masonMessage = "You are the lone mason at the meeting tonight! How sad."
+			} else if (masons.length > 1) {
+				masonMessage += "The masons meet, and learn one another's faces: "
+				for (let i = 0; i < masons.length - 1; i++){
+					masonMessage += masons[i].name + ", "
+				}
+				masonMessage += "and " + masons[masons.length-1].name + "!"
+			}
 			return (
 				<div>
 					<h2>Night Phase</h2>
 					<p>Time remaining: {getRemainingTime(this.props.userID)} seconds.</p> 
-					<p>Your role is the {thisUser.role}</p>
+					<p>{thisUser.name}: Your role is the {thisUser.role}</p>
 					<p>{masonMessage}</p>
 				</div>
 			)
-		} else if (thisUser.role == "Bodyguard"){
+		} else if (thisUser.role == "Insomniac"){
 			return (
 				<div>
 					<h2>Night Phase</h2>
 					<p>Time remaining: {getRemainingTime(this.props.userID)} seconds.</p> 
-					<p>Your role is the {thisUser.role}</p>
-					<p>Who do you want to protect?</p>
-					<form>
-						<select name="bodyguard">
-						  {mapUsers(this.props.userID)}
-						</select>
-						<button>Submit</button>
-					</form>
+					<p>{thisUser.name}: Your role is the {thisUser.role}</p>
+					<p>Your malady may turn out to be a boon on this night.</p>
 				</div>
 			)
 		} else if (thisUser.role == "Minion"){
@@ -150,7 +190,7 @@ export default class WaitingRoom extends React.Component {
 				<div>
 					<h2>Night Phase</h2>
 					<p>Time remaining: {getRemainingTime(this.props.userID)} seconds.</p>
-					<p>Your role is the {thisUser.role}</p>
+					<p>{thisUser.name}: Your role is the {thisUser.role}</p>
 					<p>{minionMessage}</p>
 				</div>
 			)
