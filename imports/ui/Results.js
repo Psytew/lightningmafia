@@ -9,24 +9,30 @@ function usersAndRoles(ID){
 	users = Users.find({room:thisUser.room}).fetch()
 	return users.map((user) => {
 		if (user.name != null){
-			return <p key={user._id}>{user.name} started the game as the {user.role} and ended it as the {user.newRole}</p>
+			return <p className="ResultsList" key={user._id}>{user.name} started the game as the {user.role} and ended it as the {user.newRole}</p>
 		}
 	})
 }
 
 function robberMessage(roomInformation){
 	if (roomInformation.Rob == null){
-		return <p>There was no robbing this game!</p>
+		return <p className="ResultsList">There was no robbing this game!</p>
 	} else {
-		return <p>{roomInformation.Rob[0]} robbed from {roomInformation.Rob[1]}</p>
+		return <p className="ResultsList">{roomInformation.Rob[0]} robbed from {roomInformation.Rob[1]}</p>
 	}
 }
 
 function troubleMessage(roomInformation){
 	if (roomInformation.Switch == null){
-		return <p>There was no troublemaking this game!</p>
+		return <p className="ResultsList">There was no troublemaking this game!</p>
 	} else {
-		return <p>{roomInformation.Switch[0]} and {roomInformation.Switch[1]} were switched!</p>
+		return <p className="ResultsList">{roomInformation.Switch[0]} and {roomInformation.Switch[1]} were switched!</p>
+	}
+}
+
+function hunterMessage(roomInformation){
+	if (roomInformation.Hunter != null){
+		return <p className="ResultsList">{roomInformation.Hunter} was the hunter, so if they were killed, whoever they pointed at is also killed!</p>
 	}
 }
 
@@ -53,11 +59,13 @@ export default class Results extends React.Component {
 		}
 		return (
 			<div>
-				<p>{werewolfMessage}</p>
+				<h1 className="Header Header--lessMargin"><i className="fas fa-bolt"> </i>Lightning Mafia<i className="fas fa-user-secret"> </i></h1>
+				<h1 className="WaitingInfo">{werewolfMessage}</h1>
 				{usersAndRoles(this.props.userID)}
 				{robberMessage(roomInformation)}
 				{troubleMessage(roomInformation)}
-				<button onClick={this.JumpToWaiting.bind(this)}>Back to room!</button>
+				{hunterMessage(roomInformation)}
+				<button className="NightButton" onClick={this.JumpToWaiting.bind(this)}>Back to room!</button>
 			</div>
 		)
 	}

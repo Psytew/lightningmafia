@@ -5,10 +5,13 @@ import {Users} from '../users.js'
 export default class NameForm extends React.Component {
 	render(){
 		return (
-			<form className="form" onSubmit={this.handleSubmit.bind(this)}>
-				<input type="text" name="playerName" placeholder="Name?" />
-				<button>Submit Name</button>
-			</form>
+			<div className="NameSection">
+				<h1 className="Header"><i className="fas fa-bolt"> </i>Lightning Mafia<i className="fas fa-user-secret"> </i></h1>
+				<form className="form" onSubmit={this.handleSubmit.bind(this)}>
+					<input className="BeginnerInput" type="text" name="playerName" placeholder="Name?" />
+					<button className="BeginnerButton">Submit Name</button>
+				</form>
+			</div>
 		)
 	} 
 	handleSubmit(e){

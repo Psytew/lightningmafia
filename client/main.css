@@ -1,4 +1,136 @@
 body {
-  padding: 10px;
   font-family: sans-serif;
+}
+
+*{
+	font-family: 'Rajdhani', sans-serif;
+}
+
+.Header{
+	font-size: 70px;
+	text-align: center;
+}
+
+.Header--lessMargin{
+	margin-bottom: 5px;
+}
+
+.BeginnerInput{
+	margin: auto;
+  	display: block;
+	width: 250px;
+	height: 30px;
+	font-size: 16px;
+	text-align: center;
+}
+
+.BeginnerButton{
+	margin: auto;
+  	display: block;
+	width: 250px;
+	height: 30px;
+	font-size: 16px;
+	text-align: center;
+}
+
+.NewRoomButton{
+	padding-right: 10px;
+}
+
+.RoomJoiners{
+	margin: 0 auto;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+}
+
+.JoinForm{
+	display: flex;
+	flex-direction: row;
+	padding-left: 10px;
+}
+
+.JoinInput{
+	height: 24px;
+	width: 200px;
+}
+
+.JoinButton{
+	width:50px;
+}
+
+.NameNote{
+	text-align: center;
+}
+
+.WaitingInfo{
+	text-align: center;
+}
+
+.User{
+	font-family: 'Arial';
+	margin: 10px auto;
+	padding-top: 8px;
+	padding-left: 10px;
+	font-size: 18px;
+	background-color: #F5F5F5;
+	width: 500px;
+	height: 28px;
+	text-align: left;
+}
+
+.PhaseTitle{
+	text-align: center;
+}
+
+.PlayTimeInfo{
+	text-align: center;
+}
+
+.NightInput{
+	margin: auto;
+  	display: block;
+	width: 250px;
+	height: 30px;
+	font-size: 16px;
+	text-align: center;
+}
+
+.NightButton{
+	margin: auto;
+  	display: block;
+	width: 250px;
+	height: 30px;
+	font-size: 16px;
+	text-align: center;
+}
+
+.RoleList{
+	font-family: 'Arial';
+	margin: 10px auto;
+	padding-top: 8px;
+	font-size: 14px;
+	background-color: #F5F5F5;
+	width: 175px;
+	height: 22px;
+	text-align: center;
+	list-style-type: none;
+	padding-left: 0px;
+}
+
+.RoleListHolder{
+	padding-left: 0px;
+}
+
+.ResultsList{
+	font-family: 'Arial';
+	margin: 10px auto;
+	padding-top: 8px;
+	font-size: 14px;
+	background-color: #F5F5F5;
+	width: 600px;
+	height: 22px;
+	text-align: center;
+	list-style-type: none;
+	padding-left: 0px;
 }

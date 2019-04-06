@@ -5,16 +5,19 @@ import {Users} from '../users.js'
 function displayUsers(userInfo){
 	thisUser = Users.find({_id:userInfo}).fetch()[0]
 	users = Users.find({room:thisUser.room}).fetch()
-	return users.map((user) => {
+	return users.map((user,i) => {
 		if (user.name != null){
-			return <p key={user._id}>{user.name} with user ID: {user._id}</p>
+			return <p className="User" key={user._id}>{i + 1}: {user.name}</p>
 		}
 	}
 )}
 
 function displayRoomCode(userInfo){
 	room = Users.find({_id:userInfo}).fetch()[0].room
-	return <h2>The room code is {room}</h2>
+	return <div className="WaitingInfo">
+			<h1>Waiting for More Players</h1>
+			<h2>The room code is {room}</h2>
+		</div>
 }
 
 function displayStartButton(userInfo){
@@ -27,17 +30,18 @@ function displayStartButton(userInfo){
 			alert("You need at least three people to play!")
 		}
 	}
-	}><button>Start Game</button></form>
+	}><button className="BeginnerButton">Start Game</button></form>
 }
 
 export default class WaitingRoom extends React.Component {
 	render(){
 		return (
-			[
-				displayRoomCode(this.props.userID),
-				displayUsers(this.props.userID),
-				displayStartButton(this.props.userID)
-			]
+			<div>
+				<h1 className="Header Header--lessMargin"><i className="fas fa-bolt"> </i>Lightning Mafia<i className="fas fa-user-secret"> </i></h1>
+				{displayRoomCode(this.props.userID)}
+				{displayUsers(this.props.userID)}
+				{displayStartButton(this.props.userID)}
+			</div>
 		)
 	}
 }

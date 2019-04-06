@@ -7,22 +7,20 @@ export default class RoomFind extends React.Component {
 	render(){
 		return (
 			<div>
-				<h1>This will help you find a room!</h1>
-				<h3>Create a room.</h3>
+				<h1 className="Header"><i className="fas fa-bolt"> </i>Lightning Mafia<i className="fas fa-user-secret"> </i></h1>
 
-				<form onSubmit={this.handleSubmitNew.bind(this)}>
-					<button>Create</button>
-				</form>
+				<div className="RoomJoiners">
+					<form onSubmit={this.handleSubmitNew.bind(this)}>
+						<button className="BeginnerButton NewRoomButton">Create New Room</button>
+					</form>
 
-				<h3>Join a room.</h3>
-				<form onSubmit={this.handleSubmitJoin.bind(this)}>
-					<p>Room Code</p>
-					<input name="roomcode" type="text" />
-					<button>Join</button>
-				</form>
+					<form className="JoinForm" onSubmit={this.handleSubmitJoin.bind(this)}>
+						<input className="BeginnerInput JoinInput" placeholder="Join Room" input name="roomcode" type="text" />
+						<button className="BeginnerButton JoinButton">Join</button>
+					</form>
+				</div>
 
-				<h3>Change Name</h3>
-				<p>You cannot join a room if someone shares your name.</p>
+				<p className="NameNote">Note: You cannot join a room if someone shares your name.</p>
 				<form onSubmit={function(){
 					e.preventDefault();
 					Users.update({
@@ -31,7 +29,7 @@ export default class RoomFind extends React.Component {
 						$set: {name:null}
 					})
 				}}>
-					<button>Change Name</button>
+					<button className="BeginnerButton">Change Name</button>
 				</form>
 
 			</div>
@@ -54,7 +52,6 @@ export default class RoomFind extends React.Component {
 		let roomToJoinInfo = Rooms.find(roomcode).fetch()
 		let roomToJoin = roomToJoinInfo[0]
 		let name = Users.find({_id:this.props.userID}).fetch()[0].name
-		console.log(name)
 		if (roomToJoinInfo.length > 0){
 			if (roomToJoin.gameStatus == null){
 				let duplicate = false

@@ -44,48 +44,60 @@ export default class WaitingRoom extends React.Component {
 			if (seerActionDone == null){
 				return (
 					<div>
-						<h2>Night Phase</h2>
-						<p>Time remaining: {getRemainingTime(this.props.userID)} seconds.</p>
-						<p>{thisUser.name}: You are the {thisUser.role}, and it is your solemn duty to use your skills to learn the truth!</p>
-						<p>Who do you want to investigate?</p>
-						<form onSubmit={function(event){
-							event.preventDefault()
-							let victim = event.target.seer.value
-							Meteor.call('SeerInformation',room,victim)
-						}}>
-							<select name="seer">
-							  {mapUsers(this.props.userID)}
-							  <option value="middle" key="Check the Middle">Check the missing roles.</option>
-							</select>
-							<button>Submit</button>
-						</form>
+						<h1 className="Header Header--lessMargin"><i className="fas fa-bolt"> </i>Lightning Mafia<i className="fas fa-user-secret"> </i></h1>
+						<h1 className="PhaseTitle">Night Phase</h1>
+						<div className="PlayTimeInfo">
+							<p>Time remaining: {getRemainingTime(this.props.userID)} seconds.</p>
+							<p>{thisUser.name}: You are the {thisUser.role}, and it is your solemn duty to use your skills to learn the truth!</p>
+							<p>Who do you want to investigate?</p>
+							<form onSubmit={function(event){
+								event.preventDefault()
+								let victim = event.target.seer.value
+								Meteor.call('SeerInformation',room,victim)
+							}}>
+								<select className="NightInput" name="seer">
+								  {mapUsers(this.props.userID)}
+								  <option value="middle" key="Check the Middle">Check the missing roles.</option>
+								</select>
+								<button className="NightButton">Submit</button>
+							</form>
+						</div>
 					</div>
 				)
 			} else {
 				return (
 					<div>
-						<h2>Night Phase</h2>
-						<p>Time remaining: {getRemainingTime(this.props.userID)} seconds.</p>
-						<p>Your role is the {thisUser.role}, and it is your solemn duty to use your skills to learn the truth!</p>
+						<h1 className="Header Header--lessMargin"><i className="fas fa-bolt"> </i>Lightning Mafia<i className="fas fa-user-secret"> </i></h1>
+						<h1 className="PhaseTitle">Night Phase</h1>
+						<div className="PlayTimeInfo">
+							<p>Time remaining: {getRemainingTime(this.props.userID)} seconds.</p>
+							<p>Your role is the {thisUser.role}, and it is your solemn duty to use your skills to learn the truth!</p>
+						</div>
 					</div>
 				)
 			}
 		} else if (thisUser.role == "Werewolf"){
 			return (
 				<div>
-					<h2>Night Phase</h2>
-					<p>Time remaining: {getRemainingTime(this.props.userID)} seconds.</p>
-					<p>{thisUser.name}: Your role is the {thisUser.role}</p>
-					<p>{werewolfMessage}</p>
+					<h1 className="Header Header--lessMargin"><i className="fas fa-bolt"> </i>Lightning Mafia<i className="fas fa-user-secret"> </i></h1>
+					<h1 className="PhaseTitle">Night Phase</h1>
+					<div className="PlayTimeInfo">
+						<p>Time remaining: {getRemainingTime(this.props.userID)} seconds.</p>
+						<p>{thisUser.name}: Your role is the {thisUser.role}</p>
+						<p>{werewolfMessage}</p>
+					</div>
 				</div>
 			)
 		} else if  (thisUser.role == "Villager"){
 			return (
 				<div>
-					<h2>Night Phase</h2>
-					<p>Time remaining: {getRemainingTime(this.props.userID)} seconds.</p> 
-					<p>{thisUser.name}: Your role is the {thisUser.role}</p>
-					<p>A were wolf has infiltrated your quaint village! Find this villain and slay them!</p>
+					<h1 className="Header Header--lessMargin"><i className="fas fa-bolt"> </i>Lightning Mafia<i className="fas fa-user-secret"> </i></h1>
+					<h1 className="PhaseTitle">Night Phase</h1>
+					<div className="PlayTimeInfo">
+						<p>Time remaining: {getRemainingTime(this.props.userID)} seconds.</p> 
+						<p>{thisUser.name}: Your role is the {thisUser.role}</p>
+						<p>A were wolf has infiltrated your quaint village! Find this villain and slay them!</p>
+					</div>
 				</div>
 			)
 		} else if (thisUser.role == "Robber"){
@@ -93,30 +105,36 @@ export default class WaitingRoom extends React.Component {
 			if (robberActionDone == null){
 				return (
 					<div>
-						<h2>Night Phase</h2>
-						<p>Time remaining: {getRemainingTime(this.props.userID)} seconds.</p> 
-						<p>{thisUser.name}: Your role is the {thisUser.role}. With your special skillset, though, perhaps not for long.</p>
-						<p>Who do you want to rob?</p>
-						<form onSubmit={function(event){
-							event.preventDefault()
-							let victim = event.target.robber.value
-							let stolenRole = Users.find({room:room,name:victim}).fetch()[0].role
-							let robber = thisUser.name
-							Meteor.call('RobInformation',room,robber,victim,stolenRole)
-						}}>
-							<select name="robber">
-							  {mapUsers(this.props.userID)}
-							</select>
-							<button>Submit</button>
-						</form>
+						<h1 className="Header Header--lessMargin"><i className="fas fa-bolt"> </i>Lightning Mafia<i className="fas fa-user-secret"> </i></h1>
+						<h1 className="PhaseTitle">Night Phase</h1>
+						<div className="PlayTimeInfo">
+							<p>Time remaining: {getRemainingTime(this.props.userID)} seconds.</p> 
+							<p>{thisUser.name}: Your role is the {thisUser.role}. With your special skillset, though, perhaps not for long.</p>
+							<p>Who do you want to rob?</p>
+							<form onSubmit={function(event){
+								event.preventDefault()
+								let victim = event.target.robber.value
+								let stolenRole = Users.find({room:room,name:victim}).fetch()[0].role
+								let robber = thisUser.name
+								Meteor.call('RobInformation',room,robber,victim,stolenRole)
+							}}>
+								<select className="NightInput" name="robber">
+								  {mapUsers(this.props.userID)}
+								</select>
+								<button className="NightButton">Submit</button>
+							</form>
+						</div>
 					</div>
 				)
 			} else {
 				return (
 					<div>
-						<h2>Night Phase</h2>
-						<p>Time remaining: {getRemainingTime(this.props.userID)} seconds.</p> 
-						<p>{thisUser.name}: Your role is the {thisUser.role}. With your special skillset, though, perhaps not for long.</p>
+						<h1 className="Header Header--lessMargin"><i className="fas fa-bolt"> </i>Lightning Mafia<i className="fas fa-user-secret"> </i></h1>
+						<h1 className="PhaseTitle">Night Phase</h1>
+						<div className="PlayTimeInfo">
+							<p>Time remaining: {getRemainingTime(this.props.userID)} seconds.</p> 
+							<p>{thisUser.name}: Your role is the {thisUser.role}. With your special skillset, though, perhaps not for long.</p>
+						</div>
 					</div>
 				)
 			}
@@ -125,34 +143,40 @@ export default class WaitingRoom extends React.Component {
 			if (troubleActionDone == null){
 				return (
 					<div>
-						<h2>Night Phase</h2>
-						<p>Time remaining: {getRemainingTime(this.props.userID)} seconds.</p> 
-						<p>{thisUser.name}: Your role is the {thisUser.role}. Sew your mischief for the good of the village!</p>
-						<p>Who do you want to switch?</p>
-						<form onSubmit={function(event){
-							event.preventDefault()
-							let victim1 = event.target.troublemaker1.value
-							let victim2 = event.target.troublemaker2.value
-							let player1role = Users.find({room:room,name:victim1}).fetch()[0].newRole
-							let player2role = Users.find({room:room,name:victim2}).fetch()[0].newRole
-							Meteor.call('TroublemakeRoom',room,victim1,victim2,player1role,player2role)
-						}}>
-							<select name="troublemaker1">
-							  {mapUsers(this.props.userID)}
-							</select>
-							<select name="troublemaker2">
-							  {mapUsers(this.props.userID)}
-							</select>
-							<button>Submit</button>
-						</form>
+						<h1 className="Header Header--lessMargin"><i className="fas fa-bolt"> </i>Lightning Mafia<i className="fas fa-user-secret"> </i></h1>
+						<h1 className="PhaseTitle">Night Phase</h1>
+						<div className="PlayTimeInfo">
+							<p>Time remaining: {getRemainingTime(this.props.userID)} seconds.</p> 
+							<p>{thisUser.name}: Your role is the {thisUser.role}. Sew your mischief for the good of the village!</p>
+							<p>Who do you want to switch?</p>
+							<form onSubmit={function(event){
+								event.preventDefault()
+								let victim1 = event.target.troublemaker1.value
+								let victim2 = event.target.troublemaker2.value
+								let player1role = Users.find({room:room,name:victim1}).fetch()[0].newRole
+								let player2role = Users.find({room:room,name:victim2}).fetch()[0].newRole
+								Meteor.call('TroublemakeRoom',room,victim1,victim2,player1role,player2role)
+							}}>
+								<select className="NightInput" name="troublemaker1">
+								  {mapUsers(this.props.userID)}
+								</select>
+								<select className="NightInput" name="troublemaker2">
+								  {mapUsers(this.props.userID)}
+								</select>
+								<button className="NightButton">Submit</button>
+							</form>
+						</div>
 					</div>
 				)
 			} else {
 				return (
 					<div>
-						<h2>Night Phase</h2>
-						<p>Time remaining: {getRemainingTime(this.props.userID)} seconds.</p> 
-						<p>{thisUser.name}: Your role is the {thisUser.role}. Sew your mischief for the good of the village!</p>
+						<h1 className="Header Header--lessMargin"><i className="fas fa-bolt"> </i>Lightning Mafia<i className="fas fa-user-secret"> </i></h1>
+						<h1 className="PhaseTitle">Night Phase</h1>
+						<div className="PlayTimeInfo">
+							<p>Time remaining: {getRemainingTime(this.props.userID)} seconds.</p> 
+							<p>{thisUser.name}: Your role is the {thisUser.role}. Sew your mischief for the good of the village!</p>
+						</div>
 					</div>
 				)
 			}
@@ -170,28 +194,50 @@ export default class WaitingRoom extends React.Component {
 			}
 			return (
 				<div>
-					<h2>Night Phase</h2>
-					<p>Time remaining: {getRemainingTime(this.props.userID)} seconds.</p> 
-					<p>{thisUser.name}: Your role is the {thisUser.role}</p>
-					<p>{masonMessage}</p>
+					<h1 className="Header Header--lessMargin"><i className="fas fa-bolt"> </i>Lightning Mafia<i className="fas fa-user-secret"> </i></h1>
+					<h1 className="PhaseTitle">Night Phase</h1>
+					<div className="PlayTimeInfo">
+						<p>Time remaining: {getRemainingTime(this.props.userID)} seconds.</p> 
+						<p>{thisUser.name}: Your role is the {thisUser.role}</p>
+						<p>{masonMessage}</p>
+					</div>
 				</div>
 			)
 		} else if (thisUser.role == "Insomniac"){
 			return (
 				<div>
-					<h2>Night Phase</h2>
-					<p>Time remaining: {getRemainingTime(this.props.userID)} seconds.</p> 
-					<p>{thisUser.name}: Your role is the {thisUser.role}</p>
-					<p>Your malady may turn out to be a boon on this night.</p>
+					<h1 className="Header Header--lessMargin"><i className="fas fa-bolt"> </i>Lightning Mafia<i className="fas fa-user-secret"> </i></h1>
+					<h1 className="PhaseTitle">Night Phase</h1>
+					<div className="PlayTimeInfo">
+						<p>Time remaining: {getRemainingTime(this.props.userID)} seconds.</p> 
+						<p>{thisUser.name}: Your role is the {thisUser.role}</p>
+						<p>Your malady may turn out to be a boon on this night.</p>
+					</div>
 				</div>
 			)
 		} else if (thisUser.role == "Minion"){
 			return (
 				<div>
-					<h2>Night Phase</h2>
-					<p>Time remaining: {getRemainingTime(this.props.userID)} seconds.</p>
-					<p>{thisUser.name}: Your role is the {thisUser.role}</p>
-					<p>{minionMessage}</p>
+					<h1 className="Header Header--lessMargin"><i className="fas fa-bolt"> </i>Lightning Mafia<i className="fas fa-user-secret"> </i></h1>
+					<h1 className="PhaseTitle">Night Phase</h1>
+					<div className="PlayTimeInfo">
+						<p>Time remaining: {getRemainingTime(this.props.userID)} seconds.</p>
+						<p>{thisUser.name}: Your role is the {thisUser.role}</p>
+						<p>{minionMessage}</p>
+					</div>
+				</div>
+			)
+		} else if (thisUser.role == "Hunter"){
+			Meteor.call('ActivateHunter',room,thisUser.name)
+			return (
+				<div>
+					<h1 className="Header Header--lessMargin"><i className="fas fa-bolt"> </i>Lightning Mafia<i className="fas fa-user-secret"> </i></h1>
+					<h1 className="PhaseTitle">Night Phase</h1>
+					<div className="PlayTimeInfo">
+						<p>Time remaining: {getRemainingTime(this.props.userID)} seconds.</p>
+						<p>{thisUser.name}: Your role is the {thisUser.role}</p>
+						<p>Ready your weapon!</p>
+					</div>
 				</div>
 			)
 		}

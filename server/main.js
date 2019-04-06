@@ -12,11 +12,11 @@ Meteor.startup(() => {
   	Meteor.methods({
       	StartButtonFunction(userInfo){
       		//The roles for the game
-      		let roles = ["Villager","Werewolf","Seer","Robber","Insomniac","Troublemaker","Werewolf","Mason","Mason","Minion","Villager","Mason","Villager","Robber","Villager","Mason"]
+      		let roles = ["Villager","Werewolf","Seer","Robber","Insomniac","Troublemaker","Werewolf","Mason","Mason","Minion","Hunter","Mason","Hunter","Werewolf","Villager","Mason"]
       		//Finds the current room, and then room length; gets only as many roles as needed
 			let room = Users.find({_id:userInfo}).fetch()[0].room
 			let rolesToUse = roles.slice(0,Users.find({room:room}).fetch().length + 4)
-			Rooms.update({_id:room},{$set: {gameStatus:"night",timer:60,Rob:null,Switch:null,Seer:null,activeRoles:[],middleRoles:[],rolesInGame:[...rolesToUse]}})
+			Rooms.update({_id:room},{$set: {gameStatus:"night",timer:60,Hunter:null,Rob:null,Switch:null,Seer:null,activeRoles:[],middleRoles:[],rolesInGame:[...rolesToUse]}})
 			//Shuffles the order of the roles
 			var currentIndex = rolesToUse.length, temporaryValue, randomIndex;
 			while (0 !== currentIndex) {
@@ -72,6 +72,10 @@ Meteor.startup(() => {
 
 		SetRoomTimers(room,time){
 			Rooms.update({_id:room},{$set:{timer:time}})
+		},
+
+		ActivateHunter(room,name){
+			Rooms.update({_id:room},{$set:{Hunter:name}})
 		},
 
 		SeerInformation(room,victim){

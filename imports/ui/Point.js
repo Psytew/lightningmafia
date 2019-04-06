@@ -6,8 +6,9 @@ export default class Point extends React.Component {
 	render(){
 		return (
 			<div>
-				<p>Vote! Point for who hangs!</p>
-				<button onClick={this.JumpToResults.bind(this)}>We picked a werewolf!</button>
+				<h1 className="Header Header--lessMargin"><i className="fas fa-bolt"> </i>Lightning Mafia<i className="fas fa-user-secret"> </i></h1>
+				<h1 className="WaitingInfo">Vote! Point for who hangs!</h1>
+				<button className="NightButton" onClick={this.JumpToResults.bind(this)}>We picked a werewolf!</button>
 			</div>
 		)
 	}

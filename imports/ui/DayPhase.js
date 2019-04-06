@@ -4,6 +4,13 @@ import {Users} from '../users.js'
 
 import {Rooms} from '../rooms.js'
 
+function returnRolesInGame(){
+	let Roles = Rooms.find({_id:room}).fetch()[0].rolesInGame
+	return Roles.map((role,i) => {
+		return <li className="RoleList" value={role} key={i}>{role}</li>
+	})
+}
+
 function getRemainingTime(userInfo){
 	thisUser = Users.find({_id:userInfo}).fetch()[0]
 	timeInSeconds = Rooms.find({_id:thisUser.room}).fetch()[0].timer
@@ -35,11 +42,16 @@ export default class DayPhase extends React.Component {
 			}
 			return (
 				<div>
-					<h2>Day Phase</h2>
-					{getRemainingTime(this.props.userID)}
-					<p>{thisUser.name}: Your role is the {thisUser.role}</p>
-					<p>{seerMessage} Now, go find the werewolves!</p>
-					<button onClick={this.JumpToPoint.bind(this)}>Jump to voting!</button>
+					<h1 className="Header Header--lessMargin"><i className="fas fa-bolt"> </i>Lightning Mafia<i className="fas fa-user-secret"> </i></h1>
+					<h1 className="PhaseTitle">Day Phase</h1>
+					<div className="PlayTimeInfo">
+						{getRemainingTime(this.props.userID)}
+						<p>{thisUser.name}: Your role is the {thisUser.role}</p>
+						<p>{seerMessage} Now, go find the werewolves!</p>
+						<p>Roles in this game:</p>
+					</div>
+					<ul className="RoleListHolder">{returnRolesInGame()}</ul>
+					<button className="NightButton" onClick={this.JumpToPoint.bind(this)}>Jump to voting!</button>
 				</div>
 			)
 		} else if (thisUser.role == "Troublemaker"){
@@ -56,11 +68,16 @@ export default class DayPhase extends React.Component {
 			}
 			return (
 				<div>
-					<h2>Day Phase</h2>
-					{getRemainingTime(this.props.userID)}
-					<p>{thisUser.name}: Your role is the {thisUser.role}</p>
-					<p>{troubleMessage}</p>
-					<button onClick={this.JumpToPoint.bind(this)}>Jump to voting!</button>
+					<h1 className="Header Header--lessMargin"><i className="fas fa-bolt"> </i>Lightning Mafia<i className="fas fa-user-secret"> </i></h1>
+					<h1 className="PhaseTitle">Day Phase</h1>
+					<div className="PlayTimeInfo">
+						{getRemainingTime(this.props.userID)}
+						<p>{thisUser.name}: Your role is the {thisUser.role}</p>
+						<p>{troubleMessage}</p>
+						<p>Roles in this game:</p>
+					</div>
+					<ul className="RoleListHolder">{returnRolesInGame()}</ul>
+					<button className="NightButton" onClick={this.JumpToPoint.bind(this)}>Jump to voting!</button>
 				</div>
 			)
 		} else if (thisUser.role == "Robber"){
@@ -74,31 +91,46 @@ export default class DayPhase extends React.Component {
 			}
 			return (
 				<div>
-					<h2>Day Phase</h2>
-					{getRemainingTime(this.props.userID)}
-					<p>{thisUser.name}: {robberMessage}</p>
-					<p>Now, find the werewolves!</p>
-					<button onClick={this.JumpToPoint.bind(this)}>Jump to voting!</button>
+					<h1 className="Header Header--lessMargin"><i className="fas fa-bolt"> </i>Lightning Mafia<i className="fas fa-user-secret"> </i></h1>
+					<h1 className="PhaseTitle">Day Phase</h1>
+					<div className="PlayTimeInfo">
+						{getRemainingTime(this.props.userID)}
+						<p>{thisUser.name}: {robberMessage}</p>
+						<p>Now, find the werewolves!</p>
+						<p>Roles in this game:</p>
+					</div>
+					<ul className="RoleListHolder">{returnRolesInGame()}</ul>
+					<button className="NightButton" onClick={this.JumpToPoint.bind(this)}>Jump to voting!</button>
 				</div>
 			)
 		} else if  (thisUser.role == "Villager"){
 			return (
 				<div>
-					<h2>Day Phase</h2>
+					<h1 className="Header Header--lessMargin"><i className="fas fa-bolt"> </i>Lightning Mafia<i className="fas fa-user-secret"> </i></h1>
+					<h1 className="PhaseTitle">Day Phase</h1>
+					<div className="PlayTimeInfo">
 					{getRemainingTime(this.props.userID)}
-					<p>{thisUser.name}: Your role is the {thisUser.role}</p>
-					<p>Grab those pitchforks and find those werewolves!</p>
-					<button onClick={this.JumpToPoint.bind(this)}>Jump to voting!</button>
+						<p>{thisUser.name}: Your role is the {thisUser.role}</p>
+						<p>Grab those pitchforks and find those werewolves!</p>
+						<p>Roles in this game:</p>
+					</div>
+					<ul className="RoleListHolder">{returnRolesInGame()}</ul>
+					<button className="NightButton" onClick={this.JumpToPoint.bind(this)}>Jump to voting!</button>
 				</div>
 			)
 		} else if (thisUser.role == "Mason"){
 			return (
 				<div>
-					<h2>Day Phase</h2>
+					<h1 className="Header Header--lessMargin"><i className="fas fa-bolt"> </i>Lightning Mafia<i className="fas fa-user-secret"> </i></h1>
+					<h1 className="PhaseTitle">Day Phase</h1>
+					<div className="PlayTimeInfo">
 					{getRemainingTime(this.props.userID)}
-					<p>{thisUser.name}: Your role is the {thisUser.role}</p>
-					<p>Now, kill those werewolves for the glory of masonry!</p>
-					<button onClick={this.JumpToPoint.bind(this)}>Jump to voting!</button>
+						<p>{thisUser.name}: Your role is the {thisUser.role}</p>
+						<p>Now, kill those werewolves for the glory of masonry!</p>
+						<p>Roles in this game:</p>
+					</div>
+					<ul className="RoleListHolder">{returnRolesInGame()}</ul>
+					<button className="NightButton" onClick={this.JumpToPoint.bind(this)}>Jump to voting!</button>
 				</div>
 			)
 		} else if (thisUser.role == "Insomniac"){
@@ -111,29 +143,59 @@ export default class DayPhase extends React.Component {
 			}
 			return (
 				<div>
-					<h2>Day Phase</h2>
-					{getRemainingTime(this.props.userID)}
-					<p>{insomMessage}</p>
-					<button onClick={this.JumpToPoint.bind(this)}>Jump to voting!</button>
+					<h1 className="Header Header--lessMargin"><i className="fas fa-bolt"> </i>Lightning Mafia<i className="fas fa-user-secret"> </i></h1>
+					<h1 className="PhaseTitle">Day Phase</h1>
+					<div className="PlayTimeInfo">
+						{getRemainingTime(this.props.userID)}
+						<p>{insomMessage}</p>
+						<p>Roles in this game:</p>
+					</div>
+					<ul className="RoleListHolder">{returnRolesInGame()}</ul>
+					<button className="NightButton" onClick={this.JumpToPoint.bind(this)}>Jump to voting!</button>
 				</div>
 			)
 		} else if (thisUser.role == "Werewolf"){
 			return (
 				<div>
-					<h2>Day Phase</h2>
+					<h1 className="Header Header--lessMargin"><i className="fas fa-bolt"> </i>Lightning Mafia<i className="fas fa-user-secret"> </i></h1>
+					<h1 className="PhaseTitle">Day Phase</h1>
+					<div className="PlayTimeInfo">
 					{getRemainingTime(this.props.userID)}
-					<p>{thisUser.name}: Your role is the {thisUser.role}. Blend in! Hide! Lie! Don't get killed!</p>
-					<button onClick={this.JumpToPoint.bind(this)}>Jump to voting!</button>
+						<p>{thisUser.name}: Your role is the {thisUser.role}. Blend in! Hide! Lie! Don't get killed!</p>
+						<p>Roles in this game:</p>
+					</div>
+					<ul className="RoleListHolder">{returnRolesInGame()}</ul>
+					<button className="NightButton" onClick={this.JumpToPoint.bind(this)}>Jump to voting!</button>
 				</div>
 			)
 		}  else if (thisUser.role == "Minion"){
 			return (
 				<div>
-					<h2>Day Phase</h2>
-					{getRemainingTime(this.props.userID)}
-					<p>{thisUser.name}: Your role is the {thisUser.role}. Try to win this one for the werewolves, by any means necessary!</p>
-					<p>Protect the werewolves!</p>
-					<button onClick={this.JumpToPoint.bind(this)}>Jump to voting!</button>
+					<h1 className="Header Header--lessMargin"><i className="fas fa-bolt"> </i>Lightning Mafia<i className="fas fa-user-secret"> </i></h1>
+					<h1 className="PhaseTitle">Day Phase</h1>
+					<div className="PlayTimeInfo">
+						{getRemainingTime(this.props.userID)}
+						<p>{thisUser.name}: Your role is the {thisUser.role}. Try to win this one for the werewolves, by any means necessary!</p>
+						<p>Protect the werewolves!</p>
+						<p>Roles in this game:</p>
+					</div>
+					<ul className="RoleListHolder">{returnRolesInGame()}</ul>
+					<button className="NightButton" onClick={this.JumpToPoint.bind(this)}>Jump to voting!</button>
+				</div>
+			)
+		} else if (thisUser.role == "Hunter"){
+			return (
+				<div>
+					<h1 className="Header Header--lessMargin"><i className="fas fa-bolt"> </i>Lightning Mafia<i className="fas fa-user-secret"> </i></h1>
+					<h1 className="PhaseTitle">Day Phase</h1>
+					<div className="PlayTimeInfo">
+						<p>{getRemainingTime(this.props.userID)}</p>
+						<p>{thisUser.name}: Your role is the {thisUser.role}</p>
+						<p>Go find those werewolves!</p>
+						<p>Roles in this game:</p>
+					</div>
+					<ul className="RoleListHolder">{returnRolesInGame()}</ul>
+					<button className="NightButton" onClick={this.JumpToPoint.bind(this)}>Jump to voting!</button>
 				</div>
 			)
 		}
