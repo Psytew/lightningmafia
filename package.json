@@ -18,5 +18,8 @@
       "client": "client/main.js",
       "server": "server/main.js"
     }
+  },
+  "engines":{
+    "node": "8.11.4"
   }
 }
