@@ -22,16 +22,16 @@ function getRemainingTime(userInfo){
 export default class WaitingRoom extends React.Component {
 	render(){
 		var thisUser = Users.find({_id:this.props.userID}).fetch()[0]
-		var werewolves = Users.find({room:room,role:"Werewolf"}).fetch()
+		var werewolves = Users.find({room:room,role:"Mafia"}).fetch()
 		var werewolfMessage = ""
 		var minionMessage = ""
 		if (werewolves.length == 0){
-			minionMessage = "No werewolf plagues the village tonight! You must be the menace!"
+			minionMessage = "There are no other Mafia members around: You're the boss tonight!"
 		} else if (werewolves.length == 1){
-			werewolfMessage = "The meeting is scarce tonight. You are the lone werewolf."
-			minionMessage = werewolves[0].name + " is the sole werewolf; guard them with your life!"
+			werewolfMessage = "The meeting is scarce tonight. You are the lone Mafia member."
+			minionMessage = werewolves[0].name + " is the sole mafia member; guard them with your life!"
 		} else {
-			werewolfMessage = "The werewolves met and learned one another's names: "
+			werewolfMessage = "The mafia members met and learned one another's names: "
 			for (let i = 0; i < werewolves.length - 1; i++){
 				werewolfMessage += werewolves[i].name + ", "
 			}
@@ -39,7 +39,7 @@ export default class WaitingRoom extends React.Component {
 			minionMessage = werewolfMessage + " Protect them!"
 		}
 		var roomTime = Rooms.find({_id:room}).fetch()[0].timer
-		if (thisUser.role == "Seer"){
+		if (thisUser.role == "Detective"){
 			let seerActionDone = Rooms.find({_id:room}).fetch()[0].Seer
 			if (seerActionDone == null){
 				return (
@@ -48,7 +48,7 @@ export default class WaitingRoom extends React.Component {
 						<h1 className="PhaseTitle">Night Phase</h1>
 						<div className="PlayTimeInfo">
 							<p>Time remaining: {getRemainingTime(this.props.userID)} seconds.</p>
-							<p>{thisUser.name}: You are the {thisUser.role}, and it is your solemn duty to use your skills to learn the truth!</p>
+							<p>{thisUser.name}: You are the {thisUser.role}, and it is your solemn duty to use your sleuth skills to learn the truth!</p>
 							<p>Who do you want to investigate?</p>
 							<form onSubmit={function(event){
 								event.preventDefault()
@@ -71,12 +71,12 @@ export default class WaitingRoom extends React.Component {
 						<h1 className="PhaseTitle">Night Phase</h1>
 						<div className="PlayTimeInfo">
 							<p>Time remaining: {getRemainingTime(this.props.userID)} seconds.</p>
-							<p>Your role is the {thisUser.role}, and it is your solemn duty to use your skills to learn the truth!</p>
+							<p>{thisUser.name}: You are the {thisUser.role}, and it is your solemn duty to use your sleuth skills to learn the truth!</p>
 						</div>
 					</div>
 				)
 			}
-		} else if (thisUser.role == "Werewolf"){
+		} else if (thisUser.role == "Mafia"){
 			return (
 				<div>
 					<h1 className="Header Header--lessMargin"><i className="fas fa-bolt"> </i>Lightning Mafia<i className="fas fa-user-secret"> </i></h1>
@@ -88,7 +88,7 @@ export default class WaitingRoom extends React.Component {
 					</div>
 				</div>
 			)
-		} else if  (thisUser.role == "Villager"){
+		} else if  (thisUser.role == "Civilian"){
 			return (
 				<div>
 					<h1 className="Header Header--lessMargin"><i className="fas fa-bolt"> </i>Lightning Mafia<i className="fas fa-user-secret"> </i></h1>
@@ -96,11 +96,11 @@ export default class WaitingRoom extends React.Component {
 					<div className="PlayTimeInfo">
 						<p>Time remaining: {getRemainingTime(this.props.userID)} seconds.</p> 
 						<p>{thisUser.name}: Your role is the {thisUser.role}</p>
-						<p>A were wolf has infiltrated your quaint village! Find this villain and slay them!</p>
+						<p>The mafia have infiltrated your quaint village! Find and slay them!</p>
 					</div>
 				</div>
 			)
-		} else if (thisUser.role == "Robber"){
+		} else if (thisUser.role == "Thief"){
 			let robberActionDone = Rooms.find({_id:room}).fetch()[0].Rob
 			if (robberActionDone == null){
 				return (
@@ -138,7 +138,7 @@ export default class WaitingRoom extends React.Component {
 					</div>
 				)
 			}
-		} else if (thisUser.role == "Troublemaker"){
+		} else if (thisUser.role == "Trickster"){
 			let troubleActionDone = Rooms.find({_id:room}).fetch()[0].Switch
 			if (troubleActionDone == null){
 				return (
@@ -215,7 +215,7 @@ export default class WaitingRoom extends React.Component {
 					</div>
 				</div>
 			)
-		} else if (thisUser.role == "Minion"){
+		} else if (thisUser.role == "Goon"){
 			return (
 				<div>
 					<h1 className="Header Header--lessMargin"><i className="fas fa-bolt"> </i>Lightning Mafia<i className="fas fa-user-secret"> </i></h1>
@@ -227,7 +227,7 @@ export default class WaitingRoom extends React.Component {
 					</div>
 				</div>
 			)
-		} else if (thisUser.role == "Hunter"){
+		} else if (thisUser.role == "Vigilante"){
 			Meteor.call('ActivateHunter',room,thisUser.name)
 			return (
 				<div>

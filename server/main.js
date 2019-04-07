@@ -12,11 +12,12 @@ Meteor.startup(() => {
   	Meteor.methods({
       	StartButtonFunction(userInfo){
       		//The roles for the game
-      		let roles = ["Villager","Werewolf","Seer","Robber","Insomniac","Troublemaker","Werewolf","Mason","Mason","Minion","Hunter","Mason","Hunter","Werewolf","Villager","Mason"]
+      		let roles = ["Mason","Mafia","Detective","Thief","Insomniac","Trickster","Mafia","Mason","Goon","Vigilante","Civilian","Mason","Mafia","Civilian","Mason","Civilian"]
       		//Finds the current room, and then room length; gets only as many roles as needed
 			let room = Users.find({_id:userInfo}).fetch()[0].room
 			let rolesToUse = roles.slice(0,Users.find({room:room}).fetch().length + 4)
-			Rooms.update({_id:room},{$set: {gameStatus:"night",timer:60,Hunter:null,Rob:null,Switch:null,Seer:null,activeRoles:[],middleRoles:[],rolesInGame:[...rolesToUse]}})
+			let sessionID = Math.floor(Math.random() * 1000000)
+			Rooms.update({_id:room},{$set: {sessionID:sessionID,gameStatus:"night",timer:60,Hunter:null,Rob:null,Switch:null,Seer:null,activeRoles:[],middleRoles:[],rolesInGame:[...rolesToUse]}})
 			//Shuffles the order of the roles
 			var currentIndex = rolesToUse.length, temporaryValue, randomIndex;
 			while (0 !== currentIndex) {
@@ -39,33 +40,36 @@ Meteor.startup(() => {
 		  	}
 		  	//Updates each player to go the night phase
 			Users.update({room:room},{$set: {gameStatus:"night"}},{multi:true})
-			Meteor.call('CountDownNight',room)
+			Meteor.call('CountDownNight',room,sessionID)
 		},
 
-		CountDownNight(room){
+		CountDownNight(room,sessionID){
 			timer = 60;
 			for (let i = timer; i >= 0; i--){
-				Meteor.call('SetDelay',i,room,"day",timer)
+				Meteor.call('SetDelay',i,room,"day",timer,sessionID)
 			}
 		},
 
-		CountDownDay(room){
+		CountDownDay(room,sessionID){
 			timer = 300;
 			for (let i = timer; i >= 0; i--){
-				Meteor.call('SetDelay',i,room,"point",timer)
+				Meteor.call('SetDelay',i,room,"point",timer,sessionID)
 			}
 		},
 
-		SetDelay(i,room,status,timer) {
+		SetDelay(i,room,status,timer,sessionID) {
 			Meteor.setTimeout(function(){
-				Rooms.update({_id:room},{$set:{timer:i}})
+				if (Rooms.find({_id:room}).fetch()[0].sessionID == sessionID ){
+					Rooms.update({_id:room},{$set:{timer:i}})
+				}
 				if (i == 0){
 					Users.update({room:room},{$set: {gameStatus:status}},{multi:true})
+					Rooms.update({_id:room},{$set:{gameStatus:status}})
 				}
 			},1000 + (1000 * (timer - i)))
 			Meteor.setTimeout(function(){
 				if (status == "day"){
-					Meteor.call('CountDownDay',room)
+					Meteor.call('CountDownDay',room,sessionID)
 				}
 			},1000 + (timer * 1000 + 50))
 		},
@@ -96,7 +100,7 @@ Meteor.startup(() => {
 		},
 
 		RobInformation(room,robber,victim,stolenRole){
-			Users.update({room:room,name:victim},{$set:{newRole:"Robber"}})
+			Users.update({room:room,name:victim},{$set:{newRole:"Thief"}})
 			Users.update({room:room,name:robber},{$set:{newRole:stolenRole}})
 			Rooms.update({_id:room},{$set:{Rob:[robber,victim,stolenRole]}})
 		},

@@ -32,7 +32,7 @@ function troubleMessage(roomInformation){
 
 function hunterMessage(roomInformation){
 	if (roomInformation.Hunter != null){
-		return <p className="ResultsList">{roomInformation.Hunter} was the hunter, so if they were killed, whoever they pointed at is also killed!</p>
+		return <p className="ResultsList">{roomInformation.Hunter} was the vigilante, so if they were killed, whoever they pointed at is also killed!</p>
 	}
 }
 
@@ -44,14 +44,14 @@ export default class Results extends React.Component {
 		var werewolfMessage = ""
 		if (werewolves.length == 0){
 			if (minion.length != 0){
-				werewolfMessage = "There was no werewolf! However, " + minion[0].name + " was the minion!"
+				werewolfMessage = "There was no mafia! However, " + minion[0].name + " was the goon; they were effectively the mafia!"
 			} else {
-				werewolfMessage = "There was no werewolf!"
+				werewolfMessage = "There was no mafia!"
 			}
 		} else if (werewolves.length == 1){
-			werewolfMessage = werewolves[0].name + " was the only werewolf!"
+			werewolfMessage = werewolves[0].name + " was the only mafia member!"
 		} else {
-			werewolfMessage = "The werewolves were: "
+			werewolfMessage = "The mafia members were: "
 			for (let i = 0; i < werewolves.length - 1; i++){
 				werewolfMessage += werewolves[i].name + ", "
 			}

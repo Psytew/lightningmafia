@@ -25,20 +25,20 @@ function getRemainingTime(userInfo){
 export default class DayPhase extends React.Component {
 	render(){
 		let sessionInformation = Rooms.find({_id:room}).fetch()[0]
-		if (thisUser.role == "Seer"){
+		if (thisUser.role == "Detective"){
 			let seerMessage = ""
 			if (sessionInformation.Seer != null){
 				let seerVictim = sessionInformation.Seer[0]
 				if (seerVictim != "middle"){
 					let victimsRole = sessionInformation.Seer[1]
-					seerMessage = `Last night, you gleamed that ${seerVictim} is the ${victimsRole}.`
+					seerMessage = `Last night, you discovered that ${seerVictim} is the ${victimsRole}.`
 				} else {
 					let role1 = sessionInformation.Seer[1]
 					let role2 = sessionInformation.Seer[2]
-					seerMessage = `Last night, you gleamed that there was no ${role1} or ${role2}.`
+					seerMessage = `Last night, you discovered that the ${role1} and the ${role2} are missing!`
 				}
 			} else {
-				seerMessage = "Apparently, you are so good you had no need to look at anyone! How skilled!"
+				seerMessage = "Apparently, you are so good you had no need to investigate anyone! How skilled!"
 			}
 			return (
 				<div>
@@ -47,14 +47,14 @@ export default class DayPhase extends React.Component {
 					<div className="PlayTimeInfo">
 						{getRemainingTime(this.props.userID)}
 						<p>{thisUser.name}: Your role is the {thisUser.role}</p>
-						<p>{seerMessage} Now, go find the werewolves!</p>
+						<p>{seerMessage} Now, go find the mafia!</p>
 						<p>Roles in this game:</p>
 					</div>
 					<ul className="RoleListHolder">{returnRolesInGame()}</ul>
 					<button className="NightButton" onClick={this.JumpToPoint.bind(this)}>Jump to voting!</button>
 				</div>
 			)
-		} else if (thisUser.role == "Troublemaker"){
+		} else if (thisUser.role == "Trickster"){
 			let troubleMessage = ""
 			if (sessionInformation.Switch != null){
 				let victim1 = sessionInformation.Switch[0]
@@ -62,7 +62,7 @@ export default class DayPhase extends React.Component {
 				let role1 = sessionInformation.Switch[2]
 				let role2 = sessionInformation.Switch[3]
 				Meteor.call('TroublemakeUsers',room,victim1,victim2,role1,role2)
-				troubleMessage = "Last night, you switched " + victim1 + " and " + victim2 + ". Now, go seek the werewolves!"
+				troubleMessage = "Last night, you switched " + victim1 + " and " + victim2 + ". Now, go stop that Mafia!"
 			} else {
 				troubleMessage = "You chose not to switch anyone! How droll!"
 			}
@@ -80,14 +80,14 @@ export default class DayPhase extends React.Component {
 					<button className="NightButton" onClick={this.JumpToPoint.bind(this)}>Jump to voting!</button>
 				</div>
 			)
-		} else if (thisUser.role == "Robber"){
+		} else if (thisUser.role == "Thief"){
 			let robberMessage = ""
 			if (sessionInformation.Rob != null){
 				let victim = sessionInformation.Rob[1]
 				let role = sessionInformation.Rob[2]
-				robberMessage = `Your role used to be the robber, but you abandoned that life when you stole the ${role} from ${victim}!`
+				robberMessage = `Your role used to be the thief, but you abandoned that life when you stole the ${role} from ${victim}!`
 			} else {
-				robberMessage = "You are the robber, but you chose not to steal from anyone! Surprisingly honest of you."
+				robberMessage = "You are the thief, but you chose not to steal from anyone! Surprisingly honest of you."
 			}
 			return (
 				<div>
@@ -96,7 +96,7 @@ export default class DayPhase extends React.Component {
 					<div className="PlayTimeInfo">
 						{getRemainingTime(this.props.userID)}
 						<p>{thisUser.name}: {robberMessage}</p>
-						<p>Now, find the werewolves!</p>
+						<p>Now, find the mafia!</p>
 						<p>Roles in this game:</p>
 					</div>
 					<ul className="RoleListHolder">{returnRolesInGame()}</ul>
@@ -111,7 +111,7 @@ export default class DayPhase extends React.Component {
 					<div className="PlayTimeInfo">
 					{getRemainingTime(this.props.userID)}
 						<p>{thisUser.name}: Your role is the {thisUser.role}</p>
-						<p>Grab those pitchforks and find those werewolves!</p>
+						<p>Grab those pitchforks and find those mafia members!</p>
 						<p>Roles in this game:</p>
 					</div>
 					<ul className="RoleListHolder">{returnRolesInGame()}</ul>
@@ -126,7 +126,7 @@ export default class DayPhase extends React.Component {
 					<div className="PlayTimeInfo">
 					{getRemainingTime(this.props.userID)}
 						<p>{thisUser.name}: Your role is the {thisUser.role}</p>
-						<p>Now, kill those werewolves for the glory of masonry!</p>
+						<p>Now, kill those mafia members for the glory of masonry!</p>
 						<p>Roles in this game:</p>
 					</div>
 					<ul className="RoleListHolder">{returnRolesInGame()}</ul>
@@ -137,7 +137,7 @@ export default class DayPhase extends React.Component {
 			let insomRole = Users.find({_id:this.props.userID}).fetch()[0].newRole
 			let insomMessage = ""
 			if (insomRole == thisUser.role){
-				insomMessage = "You are the insomniac, and in the night you were left unchanged. Go find those werewolves!"
+				insomMessage = "You are the insomniac, and in the night you were left unchanged. Go find that mafia!"
 			} else {
 				insomMessage = `You were once the inosmniac, but in the night you were changed into the ${insomRole}.`
 			}
@@ -154,7 +154,7 @@ export default class DayPhase extends React.Component {
 					<button className="NightButton" onClick={this.JumpToPoint.bind(this)}>Jump to voting!</button>
 				</div>
 			)
-		} else if (thisUser.role == "Werewolf"){
+		} else if (thisUser.role == "Mafia"){
 			return (
 				<div>
 					<h1 className="Header Header--lessMargin"><i className="fas fa-bolt"> </i>Lightning Mafia<i className="fas fa-user-secret"> </i></h1>
@@ -168,22 +168,22 @@ export default class DayPhase extends React.Component {
 					<button className="NightButton" onClick={this.JumpToPoint.bind(this)}>Jump to voting!</button>
 				</div>
 			)
-		}  else if (thisUser.role == "Minion"){
+		}  else if (thisUser.role == "Goon"){
 			return (
 				<div>
 					<h1 className="Header Header--lessMargin"><i className="fas fa-bolt"> </i>Lightning Mafia<i className="fas fa-user-secret"> </i></h1>
 					<h1 className="PhaseTitle">Day Phase</h1>
 					<div className="PlayTimeInfo">
 						{getRemainingTime(this.props.userID)}
-						<p>{thisUser.name}: Your role is the {thisUser.role}. Try to win this one for the werewolves, by any means necessary!</p>
-						<p>Protect the werewolves!</p>
+						<p>{thisUser.name}: Your role is the {thisUser.role}. Try to win this one for the Mafia, by any means necessary!</p>
+						<p>Protect the Mafia!</p>
 						<p>Roles in this game:</p>
 					</div>
 					<ul className="RoleListHolder">{returnRolesInGame()}</ul>
 					<button className="NightButton" onClick={this.JumpToPoint.bind(this)}>Jump to voting!</button>
 				</div>
 			)
-		} else if (thisUser.role == "Hunter"){
+		} else if (thisUser.role == "Vigilante"){
 			return (
 				<div>
 					<h1 className="Header Header--lessMargin"><i className="fas fa-bolt"> </i>Lightning Mafia<i className="fas fa-user-secret"> </i></h1>
@@ -191,7 +191,7 @@ export default class DayPhase extends React.Component {
 					<div className="PlayTimeInfo">
 						<p>{getRemainingTime(this.props.userID)}</p>
 						<p>{thisUser.name}: Your role is the {thisUser.role}</p>
-						<p>Go find those werewolves!</p>
+						<p>Go find those mafia members!</p>
 						<p>Roles in this game:</p>
 					</div>
 					<ul className="RoleListHolder">{returnRolesInGame()}</ul>
