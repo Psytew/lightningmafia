@@ -39,8 +39,8 @@ function hunterMessage(roomInformation){
 export default class Results extends React.Component {
 	render(){
 		var roomInformation = Rooms.find({_id:room}).fetch()[0]
-		var werewolves = Users.find({room:room,newRole:"Werewolf"}).fetch()
-		var minion = Users.find({room:room,newRole:"Minion"}).fetch()
+		var werewolves = Users.find({room:room,newRole:"Mafia"}).fetch()
+		var minion = Users.find({room:room,newRole:"Goon"}).fetch()
 		var werewolfMessage = ""
 		if (werewolves.length == 0){
 			if (minion.length != 0){
