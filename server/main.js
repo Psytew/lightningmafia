@@ -110,9 +110,11 @@ Meteor.startup(() => {
 		},
 
 		TroublemakeUsers(room,victim1,victim2,role1,role2){
-			
-			Users.update({room:room,name:victim1},{$set:{newRole:role2}})
-			Users.update({room:room,name:victim2},{$set:{newRole:role1}})
+			newRole1 = Users.find({room:room,name:victim1}).fetch()[0].newRole
+			newRole2 = Users.find({room:room,name:victim2}).fetch()[0].newRole
+			Users.update({room:room,name:victim2},{$set:{newRole:newRole1}})
+			Users.update({room:room,name:victim1},{$set:{newRole:newRole2}})
+			Rooms.update({_id:room},{$set:{Switch:[victim1,victim2,newRole1,newRole2]}})
 		},
 
 		SetRoomValues(room, status){
