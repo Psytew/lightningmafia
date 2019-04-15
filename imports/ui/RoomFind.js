@@ -1,4 +1,5 @@
 import React from 'react'
+import shortid from 'shortid'
 
 import {Users} from '../users.js'
 import {Rooms} from '../rooms.js'
@@ -39,7 +40,7 @@ export default class RoomFind extends React.Component {
 		e.preventDefault();
 		let newID = Math.random().toString(36).replace(/[^a-z]+/g, '').substr(2, 10);
 		let name = Users.find({_id:this.props.userID}).fetch()[0].name
-		let room = Rooms.insert({loop:0,id:newID,Rob:null,Seer:null,Switch:null,activeRoles:[],middleRoles:[],playerNames:[name],players:[this.props.userID]})
+		let room = Rooms.insert({_id:shortid.generate(),loop:0,Rob:null,Seer:null,Switch:null,activeRoles:[],middleRoles:[],playerNames:[name],players:[this.props.userID]})
 		Users.update({
 				_id:this.props.userID,
 			},{
