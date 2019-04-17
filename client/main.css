@@ -10,6 +10,7 @@ body {
 	font-size: 60px;
 	text-align: center;
 	margin-bottom: 0;
+	margin-top: 15px;
 }
 
 .SubHeader{
@@ -21,6 +22,10 @@ body {
 
 .Header--lessMargin{
 	margin-bottom: 5px;
+}
+
+.nameForm{
+	margin-top: 60px;
 }
 
 .BeginnerInput{
