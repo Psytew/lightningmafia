@@ -8,15 +8,16 @@ export default class RoomFind extends React.Component {
 	render(){
 		return (
 			<div>
-				<h1 className="Header"><i className="fas fa-bolt"> </i>Lightning Mafia<i className="fas fa-user-secret"> </i></h1>
+				<h2 className="Header"><i className="fas fa-bolt"></i>Lightning<i className="fas fa-bolt"></i></h2>
+				<h3 className="SubHeader"><i className="fas fa-user-secret"></i>Mafia<i className="fas fa-user-secret"></i></h3>
 
 				<div className="RoomJoiners">
 					<form onSubmit={this.handleSubmitNew.bind(this)}>
-						<button className="BeginnerButton NewRoomButton">Create New Room</button>
+						<button className="BeginnerButton NewRoomButton">New Room</button>
 					</form>
 
 					<form className="JoinForm" onSubmit={this.handleSubmitJoin.bind(this)}>
-						<input className="BeginnerInput JoinInput" placeholder="Join Room" input name="roomcode" type="text" />
+						<input className="BeginnerInput JoinInput" placeholder="Roomcode" input name="roomcode" type="text" />
 						<button className="BeginnerButton JoinButton">Join</button>
 					</form>
 				</div>

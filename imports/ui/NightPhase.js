@@ -44,7 +44,8 @@ export default class WaitingRoom extends React.Component {
 			if (seerActionDone == null){
 				return (
 					<div>
-						<h1 className="Header Header--lessMargin"><i className="fas fa-bolt"> </i>Lightning Mafia<i className="fas fa-user-secret"> </i></h1>
+					<h2 className="Header"><i className="fas fa-bolt"></i>Lightning<i className="fas fa-bolt"></i></h2>
+					<h3 className="SubHeader"><i className="fas fa-user-secret"></i>Mafia<i className="fas fa-user-secret"></i></h3>
 						<h1 className="PhaseTitle">Night Phase</h1>
 						<div className="PlayTimeInfo">
 							<p>Time remaining: {getRemainingTime(this.props.userID)} seconds.</p>
@@ -67,7 +68,8 @@ export default class WaitingRoom extends React.Component {
 			} else {
 				return (
 					<div>
-						<h1 className="Header Header--lessMargin"><i className="fas fa-bolt"> </i>Lightning Mafia<i className="fas fa-user-secret"> </i></h1>
+						<h2 className="Header"><i className="fas fa-bolt"></i>Lightning<i className="fas fa-bolt"></i></h2>
+						<h3 className="SubHeader"><i className="fas fa-user-secret"></i>Mafia<i className="fas fa-user-secret"></i></h3>
 						<h1 className="PhaseTitle">Night Phase</h1>
 						<div className="PlayTimeInfo">
 							<p>Time remaining: {getRemainingTime(this.props.userID)} seconds.</p>
@@ -79,7 +81,8 @@ export default class WaitingRoom extends React.Component {
 		} else if (thisUser.role == "Mafia"){
 			return (
 				<div>
-					<h1 className="Header Header--lessMargin"><i className="fas fa-bolt"> </i>Lightning Mafia<i className="fas fa-user-secret"> </i></h1>
+					<h2 className="Header"><i className="fas fa-bolt"></i>Lightning<i className="fas fa-bolt"></i></h2>
+					<h3 className="SubHeader"><i className="fas fa-user-secret"></i>Mafia<i className="fas fa-user-secret"></i></h3>
 					<h1 className="PhaseTitle">Night Phase</h1>
 					<div className="PlayTimeInfo">
 						<p>Time remaining: {getRemainingTime(this.props.userID)} seconds.</p>
@@ -91,7 +94,8 @@ export default class WaitingRoom extends React.Component {
 		} else if  (thisUser.role == "Civilian"){
 			return (
 				<div>
-					<h1 className="Header Header--lessMargin"><i className="fas fa-bolt"> </i>Lightning Mafia<i className="fas fa-user-secret"> </i></h1>
+					<h2 className="Header"><i className="fas fa-bolt"></i>Lightning<i className="fas fa-bolt"></i></h2>
+					<h3 className="SubHeader"><i className="fas fa-user-secret"></i>Mafia<i className="fas fa-user-secret"></i></h3>
 					<h1 className="PhaseTitle">Night Phase</h1>
 					<div className="PlayTimeInfo">
 						<p>Time remaining: {getRemainingTime(this.props.userID)} seconds.</p> 
@@ -105,7 +109,8 @@ export default class WaitingRoom extends React.Component {
 			if (robberActionDone == null){
 				return (
 					<div>
-						<h1 className="Header Header--lessMargin"><i className="fas fa-bolt"> </i>Lightning Mafia<i className="fas fa-user-secret"> </i></h1>
+						<h2 className="Header"><i className="fas fa-bolt"></i>Lightning<i className="fas fa-bolt"></i></h2>
+						<h3 className="SubHeader"><i className="fas fa-user-secret"></i>Mafia<i className="fas fa-user-secret"></i></h3>
 						<h1 className="PhaseTitle">Night Phase</h1>
 						<div className="PlayTimeInfo">
 							<p>Time remaining: {getRemainingTime(this.props.userID)} seconds.</p> 
@@ -129,7 +134,8 @@ export default class WaitingRoom extends React.Component {
 			} else {
 				return (
 					<div>
-						<h1 className="Header Header--lessMargin"><i className="fas fa-bolt"> </i>Lightning Mafia<i className="fas fa-user-secret"> </i></h1>
+						<h2 className="Header"><i className="fas fa-bolt"></i>Lightning<i className="fas fa-bolt"></i></h2>
+						<h3 className="SubHeader"><i className="fas fa-user-secret"></i>Mafia<i className="fas fa-user-secret"></i></h3>
 						<h1 className="PhaseTitle">Night Phase</h1>
 						<div className="PlayTimeInfo">
 							<p>Time remaining: {getRemainingTime(this.props.userID)} seconds.</p> 
@@ -143,7 +149,8 @@ export default class WaitingRoom extends React.Component {
 			if (troubleActionDone == null){
 				return (
 					<div>
-						<h1 className="Header Header--lessMargin"><i className="fas fa-bolt"> </i>Lightning Mafia<i className="fas fa-user-secret"> </i></h1>
+						<h2 className="Header"><i className="fas fa-bolt"></i>Lightning<i className="fas fa-bolt"></i></h2>
+						<h3 className="SubHeader"><i className="fas fa-user-secret"></i>Mafia<i className="fas fa-user-secret"></i></h3>
 						<h1 className="PhaseTitle">Night Phase</h1>
 						<div className="PlayTimeInfo">
 							<p>Time remaining: {getRemainingTime(this.props.userID)} seconds.</p> 
@@ -171,7 +178,8 @@ export default class WaitingRoom extends React.Component {
 			} else {
 				return (
 					<div>
-						<h1 className="Header Header--lessMargin"><i className="fas fa-bolt"> </i>Lightning Mafia<i className="fas fa-user-secret"> </i></h1>
+						<h2 className="Header"><i className="fas fa-bolt"></i>Lightning<i className="fas fa-bolt"></i></h2>
+						<h3 className="SubHeader"><i className="fas fa-user-secret"></i>Mafia<i className="fas fa-user-secret"></i></h3>
 						<h1 className="PhaseTitle">Night Phase</h1>
 						<div className="PlayTimeInfo">
 							<p>Time remaining: {getRemainingTime(this.props.userID)} seconds.</p> 
@@ -194,7 +202,8 @@ export default class WaitingRoom extends React.Component {
 			}
 			return (
 				<div>
-					<h1 className="Header Header--lessMargin"><i className="fas fa-bolt"> </i>Lightning Mafia<i className="fas fa-user-secret"> </i></h1>
+					<h2 className="Header"><i className="fas fa-bolt"></i>Lightning<i className="fas fa-bolt"></i></h2>
+					<h3 className="SubHeader"><i className="fas fa-user-secret"></i>Mafia<i className="fas fa-user-secret"></i></h3>
 					<h1 className="PhaseTitle">Night Phase</h1>
 					<div className="PlayTimeInfo">
 						<p>Time remaining: {getRemainingTime(this.props.userID)} seconds.</p> 
@@ -206,7 +215,8 @@ export default class WaitingRoom extends React.Component {
 		} else if (thisUser.role == "Insomniac"){
 			return (
 				<div>
-					<h1 className="Header Header--lessMargin"><i className="fas fa-bolt"> </i>Lightning Mafia<i className="fas fa-user-secret"> </i></h1>
+					<h2 className="Header"><i className="fas fa-bolt"></i>Lightning<i className="fas fa-bolt"></i></h2>
+					<h3 className="SubHeader"><i className="fas fa-user-secret"></i>Mafia<i className="fas fa-user-secret"></i></h3>
 					<h1 className="PhaseTitle">Night Phase</h1>
 					<div className="PlayTimeInfo">
 						<p>Time remaining: {getRemainingTime(this.props.userID)} seconds.</p> 
@@ -218,7 +228,8 @@ export default class WaitingRoom extends React.Component {
 		} else if (thisUser.role == "Goon"){
 			return (
 				<div>
-					<h1 className="Header Header--lessMargin"><i className="fas fa-bolt"> </i>Lightning Mafia<i className="fas fa-user-secret"> </i></h1>
+					<h2 className="Header"><i className="fas fa-bolt"></i>Lightning<i className="fas fa-bolt"></i></h2>
+					<h3 className="SubHeader"><i className="fas fa-user-secret"></i>Mafia<i className="fas fa-user-secret"></i></h3>
 					<h1 className="PhaseTitle">Night Phase</h1>
 					<div className="PlayTimeInfo">
 						<p>Time remaining: {getRemainingTime(this.props.userID)} seconds.</p>
@@ -231,7 +242,8 @@ export default class WaitingRoom extends React.Component {
 			Meteor.call('ActivateHunter',room,thisUser.name)
 			return (
 				<div>
-					<h1 className="Header Header--lessMargin"><i className="fas fa-bolt"> </i>Lightning Mafia<i className="fas fa-user-secret"> </i></h1>
+					<h2 className="Header"><i className="fas fa-bolt"></i>Lightning<i className="fas fa-bolt"></i></h2>
+					<h3 className="SubHeader"><i className="fas fa-user-secret"></i>Mafia<i className="fas fa-user-secret"></i></h3>
 					<h1 className="PhaseTitle">Night Phase</h1>
 					<div className="PlayTimeInfo">
 						<p>Time remaining: {getRemainingTime(this.props.userID)} seconds.</p>

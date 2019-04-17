@@ -59,7 +59,8 @@ export default class Results extends React.Component {
 		}
 		return (
 			<div>
-				<h1 className="Header Header--lessMargin"><i className="fas fa-bolt"> </i>Lightning Mafia<i className="fas fa-user-secret"> </i></h1>
+				<h2 className="Header"><i className="fas fa-bolt"></i>Lightning<i className="fas fa-bolt"></i></h2>
+				<h3 className="SubHeader"><i className="fas fa-user-secret"></i>Mafia<i className="fas fa-user-secret"></i></h3>					<h1 className="PhaseTitle">Day Phase</h1>
 				<h1 className="WaitingInfo">{werewolfMessage}</h1>
 				{usersAndRoles(this.props.userID)}
 				{robberMessage(roomInformation)}

@@ -9,6 +9,13 @@ body {
 .Header{
 	font-size: 70px;
 	text-align: center;
+	margin-bottom: 0;
+}
+
+.SubHeader{
+	font-size: 55px;
+	text-align: center;
+	margin-top: 0;
 }
 
 .Header--lessMargin{
@@ -34,25 +41,27 @@ body {
 }
 
 .NewRoomButton{
+	width: 150px;
 	padding-right: 10px;
 }
 
 .RoomJoiners{
+	width: 350px;
 	margin: 0 auto;
 	display: flex;
 	flex-direction: row;
-	justify-content: center;
+	justify-content: space-between;
 }
 
 .JoinForm{
+	width: 150px;
 	display: flex;
 	flex-direction: row;
-	padding-left: 10px;
 }
 
 .JoinInput{
 	height: 24px;
-	width: 200px;
+	width: 100px;
 }
 
 .JoinButton{
@@ -74,7 +83,7 @@ body {
 	padding-left: 10px;
 	font-size: 18px;
 	background-color: #F5F5F5;
-	width: 500px;
+	width: 320px;
 	height: 28px;
 	text-align: left;
 }
@@ -124,13 +133,11 @@ body {
 
 .ResultsList{
 	font-family: 'Arial';
+	padding: 8px 5px 7px 5px;
 	margin: 10px auto;
-	padding-top: 8px;
 	font-size: 14px;
 	background-color: #F5F5F5;
-	width: 600px;
-	height: 22px;
+	width: 300px;
 	text-align: center;
 	list-style-type: none;
-	padding-left: 0px;
 }

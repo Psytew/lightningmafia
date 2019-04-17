@@ -6,7 +6,8 @@ export default class NameForm extends React.Component {
 	render(){
 		return (
 			<div className="NameSection">
-				<h1 className="Header"><i className="fas fa-bolt"> </i>Lightning Mafia<i className="fas fa-user-secret"> </i></h1>
+				<h2 className="Header"><i className="fas fa-bolt"></i>Lightning<i className="fas fa-bolt"></i></h2>
+				<h3 className="SubHeader"><i className="fas fa-user-secret"></i>Mafia<i className="fas fa-user-secret"></i></h3>
 				<form className="form" onSubmit={this.handleSubmit.bind(this)}>
 					<input className="BeginnerInput" type="text" name="playerName" placeholder="Name?" />
 					<button className="BeginnerButton">Submit Name</button>
