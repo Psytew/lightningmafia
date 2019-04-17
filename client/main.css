@@ -16,6 +16,7 @@ body {
 	font-size: 50px;
 	text-align: center;
 	margin-top: 0;
+	margin-bottom: 0;
 }
 
 .Header--lessMargin{
@@ -46,7 +47,7 @@ body {
 }
 
 .ButtonWithBottomMargin{
-	margin-bottom: 20px;
+	margin-bottom: 30px;
 }
 
 .RoomJoiners{
