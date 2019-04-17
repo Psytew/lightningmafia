@@ -52,7 +52,7 @@ export default class DayPhase extends React.Component {
 						<p>Roles in this game:</p>
 					</div>
 					<ul className="RoleListHolder">{returnRolesInGame()}</ul>
-					<button className="NightButton" onClick={this.JumpToPoint.bind(this)}>Jump to voting!</button>
+					<button className="NightButton ButtonWithBottomMargin" onClick={this.JumpToPoint.bind(this)}>Jump to voting!</button>
 				</div>
 			)
 		} else if (thisUser.role == "Trickster"){
@@ -78,7 +78,7 @@ export default class DayPhase extends React.Component {
 						<p>Roles in this game:</p>
 					</div>
 					<ul className="RoleListHolder">{returnRolesInGame()}</ul>
-					<button className="NightButton" onClick={this.JumpToPoint.bind(this)}>Jump to voting!</button>
+					<button className="NightButton ButtonWithBottomMargin" onClick={this.JumpToPoint.bind(this)}>Jump to voting!</button>
 				</div>
 			)
 		} else if (thisUser.role == "Thief"){
@@ -101,7 +101,7 @@ export default class DayPhase extends React.Component {
 						<p>Roles in this game:</p>
 					</div>
 					<ul className="RoleListHolder">{returnRolesInGame()}</ul>
-					<button className="NightButton" onClick={this.JumpToPoint.bind(this)}>Jump to voting!</button>
+					<button className="NightButton ButtonWithBottomMargin" onClick={this.JumpToPoint.bind(this)}>Jump to voting!</button>
 				</div>
 			)
 		} else if  (thisUser.role == "Villager"){
@@ -117,7 +117,7 @@ export default class DayPhase extends React.Component {
 						<p>Roles in this game:</p>
 					</div>
 					<ul className="RoleListHolder">{returnRolesInGame()}</ul>
-					<button className="NightButton" onClick={this.JumpToPoint.bind(this)}>Jump to voting!</button>
+					<button className="NightButton ButtonWithBottomMargin" onClick={this.JumpToPoint.bind(this)}>Jump to voting!</button>
 				</div>
 			)
 		} else if (thisUser.role == "Mason"){
@@ -133,7 +133,7 @@ export default class DayPhase extends React.Component {
 						<p>Roles in this game:</p>
 					</div>
 					<ul className="RoleListHolder">{returnRolesInGame()}</ul>
-					<button className="NightButton" onClick={this.JumpToPoint.bind(this)}>Jump to voting!</button>
+					<button className="NightButton ButtonWithBottomMargin" onClick={this.JumpToPoint.bind(this)}>Jump to voting!</button>
 				</div>
 			)
 		} else if (thisUser.role == "Insomniac"){
@@ -155,7 +155,7 @@ export default class DayPhase extends React.Component {
 						<p>Roles in this game:</p>
 					</div>
 					<ul className="RoleListHolder">{returnRolesInGame()}</ul>
-					<button className="NightButton" onClick={this.JumpToPoint.bind(this)}>Jump to voting!</button>
+					<button className="NightButton ButtonWithBottomMargin" onClick={this.JumpToPoint.bind(this)}>Jump to voting!</button>
 				</div>
 			)
 		} else if (thisUser.role == "Mafia"){
@@ -170,7 +170,7 @@ export default class DayPhase extends React.Component {
 						<p>Roles in this game:</p>
 					</div>
 					<ul className="RoleListHolder">{returnRolesInGame()}</ul>
-					<button className="NightButton" onClick={this.JumpToPoint.bind(this)}>Jump to voting!</button>
+					<button className="NightButton ButtonWithBottomMargin" onClick={this.JumpToPoint.bind(this)}>Jump to voting!</button>
 				</div>
 			)
 		}  else if (thisUser.role == "Goon"){
@@ -186,7 +186,7 @@ export default class DayPhase extends React.Component {
 						<p>Roles in this game:</p>
 					</div>
 					<ul className="RoleListHolder">{returnRolesInGame()}</ul>
-					<button className="NightButton" onClick={this.JumpToPoint.bind(this)}>Jump to voting!</button>
+					<button className="NightButton ButtonWithBottomMargin" onClick={this.JumpToPoint.bind(this)}>Jump to voting!</button>
 				</div>
 			)
 		} else if (thisUser.role == "Vigilante"){
@@ -202,7 +202,7 @@ export default class DayPhase extends React.Component {
 						<p>Roles in this game:</p>
 					</div>
 					<ul className="RoleListHolder">{returnRolesInGame()}</ul>
-					<button className="NightButton" onClick={this.JumpToPoint.bind(this)}>Jump to voting!</button>
+					<button className="NightButton ButtonWithBottomMargin" onClick={this.JumpToPoint.bind(this)}>Jump to voting!</button>
 				</div>
 			)
 		}

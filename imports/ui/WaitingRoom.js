@@ -30,7 +30,7 @@ function displayStartButton(userInfo){
 			alert("You need at least three people to play!")
 		}
 	}
-	}><button className="BeginnerButton">Start Game</button></form>
+	}><button className="BeginnerButton StartRoomButton">Start Game</button></form>
 }
 
 export default class WaitingRoom extends React.Component {

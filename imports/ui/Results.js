@@ -66,7 +66,7 @@ export default class Results extends React.Component {
 				{robberMessage(roomInformation)}
 				{troubleMessage(roomInformation)}
 				{hunterMessage(roomInformation)}
-				<button className="NightButton" onClick={this.JumpToWaiting.bind(this)}>Back to room!</button>
+				<button className="NightButton ButtonWithBottomMargin" onClick={this.JumpToWaiting.bind(this)}>Back to room!</button>
 			</div>
 		)
 	}

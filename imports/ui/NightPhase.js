@@ -56,11 +56,11 @@ export default class WaitingRoom extends React.Component {
 								let victim = event.target.seer.value
 								Meteor.call('SeerInformation',room,victim)
 							}}>
-								<select className="NightInput" name="seer">
+								<select className="NightInput ButtonWithBottomMargin" name="seer">
 								  {mapUsers(this.props.userID)}
 								  <option value="middle" key="Check the Middle">Check the missing roles.</option>
 								</select>
-								<button className="NightButton">Submit</button>
+								<button className="NightButton ButtonWithBottomMargin">Submit</button>
 							</form>
 						</div>
 					</div>
@@ -123,10 +123,10 @@ export default class WaitingRoom extends React.Component {
 								let robber = thisUser.name
 								Meteor.call('RobInformation',room,robber,victim,stolenRole)
 							}}>
-								<select className="NightInput" name="robber">
+								<select className="NightInput ButtonWithBottomMargin" name="robber">
 								  {mapUsers(this.props.userID)}
 								</select>
-								<button className="NightButton">Submit</button>
+								<button className="NightButton ButtonWithBottomMargin">Submit</button>
 							</form>
 						</div>
 					</div>
@@ -164,13 +164,13 @@ export default class WaitingRoom extends React.Component {
 								let player2role = Users.find({room:room,name:victim2}).fetch()[0].newRole
 								Meteor.call('TroublemakeRoom',room,victim1,victim2,player1role,player2role)
 							}}>
-								<select className="NightInput" name="troublemaker1">
+								<select className="NightInput ButtonWithBottomMargin" name="troublemaker1">
 								  {mapUsers(this.props.userID)}
 								</select>
-								<select className="NightInput" name="troublemaker2">
+								<select className="NightInput ButtonWithBottomMargin" name="troublemaker2">
 								  {mapUsers(this.props.userID)}
 								</select>
-								<button className="NightButton">Submit</button>
+								<button className="NightButton ButtonWithBottomMargin">Submit</button>
 							</form>
 						</div>
 					</div>
