@@ -59,12 +59,15 @@ Meteor.startup(() => {
 
 		SetDelay(i,room,status,timer,sessionID) {
 			Meteor.setTimeout(function(){
-				if (Rooms.find({_id:room}).fetch()[0].sessionID == sessionID ){
-					Rooms.update({_id:room},{$set:{timer:i}})
-				}
-				if (i == 0){
-					Users.update({room:room},{$set: {gameStatus:status}},{multi:true})
-					Rooms.update({_id:room},{$set:{gameStatus:status}})
+				let usingRoom = Rooms.find({_id:room}).fetch()[0]
+				if (usingRoom != null && usingRoom != undefined){
+					if (usingRoom.sessionID == sessionID ){
+						Rooms.update({_id:room},{$set:{timer:i}})
+					}
+					if (i == 0){
+						Users.update({room:room},{$set: {gameStatus:status}},{multi:true})
+						Rooms.update({_id:room},{$set:{gameStatus:status}})
+					}
 				}
 			},1000 + (1000 * (timer - i)))
 			Meteor.setTimeout(function(){
