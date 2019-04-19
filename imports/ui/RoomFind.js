@@ -4,12 +4,13 @@ import shortid from 'shortid'
 import {Users} from '../users.js'
 import {Rooms} from '../rooms.js'
 
+import Header from './Header'
+
 export default class RoomFind extends React.Component {
 	render(){
 		return (
 			<div>
-				<h2 className="Header"><i className="fas fa-bolt"></i>Lightning<i className="fas fa-bolt"></i></h2>
-				<h3 className="SubHeader"><i className="fas fa-user-secret"></i>Mafia<i className="fas fa-user-secret"></i></h3>
+				<Header />
 
 				<div className="RoomJoiners">
 					<form onSubmit={this.handleSubmitNew.bind(this)}>

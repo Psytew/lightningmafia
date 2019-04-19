@@ -1,13 +1,13 @@
 import React from 'react'
 
 import {Users} from '../users.js'
+import Header from './Header'
 
 export default class NameForm extends React.Component {
 	render(){
 		return (
 			<div className="NameSection">
-				<h2 className="Header"><i className="fas fa-bolt"></i>Lightning<i className="fas fa-bolt"></i></h2>
-				<h3 className="SubHeader"><i className="fas fa-user-secret"></i>Mafia<i className="fas fa-user-secret"></i></h3>
+				<Header />
 				<form className="nameForm" onSubmit={this.handleSubmit.bind(this)}>
 					<input className="BeginnerInput" type="text" name="playerName" placeholder="Name?" />
 					<button className="BeginnerButton">Submit Name</button>

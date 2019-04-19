@@ -1,8 +1,9 @@
 import React from 'react'
 
 import {Users} from '../users.js'
-
 import {Rooms} from '../rooms.js'
+
+import Header from './Header'
 
 function usersAndRoles(ID){
 	thisUser = Users.find({_id:ID}).fetch()[0]
@@ -59,8 +60,7 @@ export default class Results extends React.Component {
 		}
 		return (
 			<div>
-				<h2 className="Header"><i className="fas fa-bolt"></i>Lightning<i className="fas fa-bolt"></i></h2>
-				<h3 className="SubHeader"><i className="fas fa-user-secret"></i>Mafia<i className="fas fa-user-secret"></i></h3>					<h1 className="PhaseTitle">Day Phase</h1>
+				<Header />
 				<h1 className="WaitingInfo">{werewolfMessage}</h1>
 				{usersAndRoles(this.props.userID)}
 				{robberMessage(roomInformation)}

@@ -1,8 +1,9 @@
 import React from 'react'
 
 import {Users} from '../users.js'
-
 import {Rooms} from '../rooms.js'
+
+import Header from './Header'
 
 function returnRolesInGame(){
 	let Roles = Rooms.find({_id:room}).fetch()[0].rolesInGame
@@ -42,8 +43,7 @@ export default class DayPhase extends React.Component {
 			}
 			return (
 				<div>
-					<h2 className="Header"><i className="fas fa-bolt"></i>Lightning<i className="fas fa-bolt"></i></h2>
-					<h3 className="SubHeader"><i className="fas fa-user-secret"></i>Mafia<i className="fas fa-user-secret"></i></h3>
+					<Header />
 					<h1 className="PhaseTitle">Day Phase</h1>
 					<div className="PlayTimeInfo">
 						{getRemainingTime(this.props.userID)}
@@ -69,8 +69,8 @@ export default class DayPhase extends React.Component {
 			}
 			return (
 				<div>
-					<h2 className="Header"><i className="fas fa-bolt"></i>Lightning<i className="fas fa-bolt"></i></h2>
-					<h3 className="SubHeader"><i className="fas fa-user-secret"></i>Mafia<i className="fas fa-user-secret"></i></h3>
+					<Header />
+					<h1 className="PhaseTitle">Day Phase</h1>
 					<div className="PlayTimeInfo">
 						{getRemainingTime(this.props.userID)}
 						<p>{thisUser.name}: Your role is the {thisUser.role}</p>
@@ -92,8 +92,8 @@ export default class DayPhase extends React.Component {
 			}
 			return (
 				<div>
-					<h2 className="Header"><i className="fas fa-bolt"></i>Lightning<i className="fas fa-bolt"></i></h2>
-					<h3 className="SubHeader"><i className="fas fa-user-secret"></i>Mafia<i className="fas fa-user-secret"></i></h3>
+					<Header />
+					<h1 className="PhaseTitle">Day Phase</h1>
 					<div className="PlayTimeInfo">
 						{getRemainingTime(this.props.userID)}
 						<p>{thisUser.name}: {robberMessage}</p>
@@ -107,8 +107,7 @@ export default class DayPhase extends React.Component {
 		} else if  (thisUser.role == "Villager"){
 			return (
 				<div>
-					<h2 className="Header"><i className="fas fa-bolt"></i>Lightning<i className="fas fa-bolt"></i></h2>
-					<h3 className="SubHeader"><i className="fas fa-user-secret"></i>Mafia<i className="fas fa-user-secret"></i></h3>
+					<Header />
 					<h1 className="PhaseTitle">Day Phase</h1>
 					<div className="PlayTimeInfo">
 					{getRemainingTime(this.props.userID)}
@@ -123,8 +122,7 @@ export default class DayPhase extends React.Component {
 		} else if (thisUser.role == "Mason"){
 			return (
 				<div>
-					<h2 className="Header"><i className="fas fa-bolt"></i>Lightning<i className="fas fa-bolt"></i></h2>
-					<h3 className="SubHeader"><i className="fas fa-user-secret"></i>Mafia<i className="fas fa-user-secret"></i></h3>
+					<Header />
 					<h1 className="PhaseTitle">Day Phase</h1>
 					<div className="PlayTimeInfo">
 					{getRemainingTime(this.props.userID)}
@@ -146,8 +144,7 @@ export default class DayPhase extends React.Component {
 			}
 			return (
 				<div>
-					<h2 className="Header"><i className="fas fa-bolt"></i>Lightning<i className="fas fa-bolt"></i></h2>
-					<h3 className="SubHeader"><i className="fas fa-user-secret"></i>Mafia<i className="fas fa-user-secret"></i></h3>
+					<Header />
 					<h1 className="PhaseTitle">Day Phase</h1>
 					<div className="PlayTimeInfo">
 						{getRemainingTime(this.props.userID)}
@@ -161,8 +158,7 @@ export default class DayPhase extends React.Component {
 		} else if (thisUser.role == "Mafia"){
 			return (
 				<div>
-					<h2 className="Header"><i className="fas fa-bolt"></i>Lightning<i className="fas fa-bolt"></i></h2>
-					<h3 className="SubHeader"><i className="fas fa-user-secret"></i>Mafia<i className="fas fa-user-secret"></i></h3>
+					<Header />
 					<h1 className="PhaseTitle">Day Phase</h1>
 					<div className="PlayTimeInfo">
 					{getRemainingTime(this.props.userID)}
@@ -176,8 +172,7 @@ export default class DayPhase extends React.Component {
 		}  else if (thisUser.role == "Goon"){
 			return (
 				<div>
-					<h2 className="Header"><i className="fas fa-bolt"></i>Lightning<i className="fas fa-bolt"></i></h2>
-					<h3 className="SubHeader"><i className="fas fa-user-secret"></i>Mafia<i className="fas fa-user-secret"></i></h3>
+					<Header />
 					<h1 className="PhaseTitle">Day Phase</h1>
 					<div className="PlayTimeInfo">
 						{getRemainingTime(this.props.userID)}
@@ -192,8 +187,7 @@ export default class DayPhase extends React.Component {
 		} else if (thisUser.role == "Vigilante"){
 			return (
 				<div>
-					<h2 className="Header"><i className="fas fa-bolt"></i>Lightning<i className="fas fa-bolt"></i></h2>
-					<h3 className="SubHeader"><i className="fas fa-user-secret"></i>Mafia<i className="fas fa-user-secret"></i></h3>
+					<Header />
 					<h1 className="PhaseTitle">Day Phase</h1>
 					<div className="PlayTimeInfo">
 						<p>{getRemainingTime(this.props.userID)}</p>

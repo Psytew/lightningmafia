@@ -2,6 +2,8 @@ import React from 'react'
 
 import {Users} from '../users.js'
 
+import Header from './Header'
+
 function displayUsers(userInfo){
 	thisUser = Users.find({_id:userInfo}).fetch()[0]
 	users = Users.find({room:thisUser.room}).fetch()
@@ -37,8 +39,7 @@ export default class WaitingRoom extends React.Component {
 	render(){
 		return (
 			<div>
-				<h2 className="Header"><i className="fas fa-bolt"></i>Lightning<i className="fas fa-bolt"></i></h2>
-				<h3 className="SubHeader"><i className="fas fa-user-secret"></i>Mafia<i className="fas fa-user-secret"></i></h3>
+				<Header />
 				{displayRoomCode(this.props.userID)}
 				{displayUsers(this.props.userID)}
 				{displayStartButton(this.props.userID)}
